@@ -41,30 +41,6 @@ const SobreSection = () => {
               </p>
             </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-6 mt-12">
-              {[
-                { icon: Users, value: "50+", label: "Clientes" },
-                { icon: Code2, value: "30+", label: "Sites" },
-                { icon: Camera, value: "500+", label: "Fotos" },
-              ].map((stat, index) => (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                  className="text-center"
-                >
-                  <stat.icon className="w-5 h-5 text-primary mx-auto mb-2" />
-                  <div className="font-display text-2xl md:text-3xl font-semibold">
-                    {stat.value}
-                  </div>
-                  <div className="font-body text-sm text-muted-foreground">
-                    {stat.label}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
           </motion.div>
 
           {/* Right Column - Visual */}
