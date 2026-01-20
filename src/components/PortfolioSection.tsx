@@ -13,13 +13,6 @@ const projects = [
     image: gramaPrimeImage,
     tags: ["E-commerce", "Catálogo", "UI/UX"],
   },
-  {
-    title: "Orflie Audit",
-    description: "Sobriedade e credibilidade corporativa. Um portal institucional desenhado para passar confiança absoluta em auditoria.",
-    url: "https://www.orflieaudit.com.br/",
-    image: "", // Placeholder - adicionar screenshot depois
-    tags: ["Institucional", "Corporativo", "Auditoria"],
-  },
 ];
 
 const PortfolioSection = () => {
