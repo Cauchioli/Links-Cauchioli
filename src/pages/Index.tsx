@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import DiferencialSection from "@/components/DiferencialSection";
 import PortfolioSection from "@/components/PortfolioSection";
-import FotografiaSection from "@/components/FotografiaSection";
+// import FotografiaSection from "@/components/FotografiaSection"; // Temporariamente removido
 import SobreSection from "@/components/SobreSection";
 import FooterSection from "@/components/FooterSection";
 
@@ -13,7 +13,7 @@ const Index = () => {
       <HeroSection />
       <DiferencialSection />
       <PortfolioSection />
-      <FotografiaSection />
+      {/* Seção de Fotografia temporariamente removida */}
       <SobreSection />
       <FooterSection />
     </main>

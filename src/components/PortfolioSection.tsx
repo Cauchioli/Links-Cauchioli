@@ -3,20 +3,21 @@ import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { ExternalLink, Monitor } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import gramaPrimeImage from "@/assets/grama-prime-screenshot.png";
 
 const projects = [
   {
     title: "Grama Prime",
     description: "Design visual focado na percepção de qualidade do produto. Navegação fluida e catálogo imersivo.",
     url: "https://www.gramaprime.com.br/",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=800&fit=crop",
+    image: gramaPrimeImage,
     tags: ["E-commerce", "Catálogo", "UI/UX"],
   },
   {
     title: "Orflie Audit",
     description: "Sobriedade e credibilidade corporativa. Um portal institucional desenhado para passar confiança absoluta em auditoria.",
     url: "https://www.orflieaudit.com.br/",
-    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&h=800&fit=crop",
+    image: "", // Placeholder - adicionar screenshot depois
     tags: ["Institucional", "Corporativo", "Auditoria"],
   },
 ];
@@ -82,11 +83,17 @@ const PortfolioSection = () => {
 
                   {/* Website Preview */}
                   <div className="relative aspect-video overflow-hidden">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
+                    {project.image ? (
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-muted/30 flex items-center justify-center">
+                        <span className="text-muted-foreground font-body text-sm">Screenshot em breve</span>
+                      </div>
+                    )}
                     <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
                   </div>
                 </div>
