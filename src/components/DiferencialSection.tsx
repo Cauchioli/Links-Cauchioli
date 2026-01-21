@@ -65,13 +65,11 @@ const DiferencialSection = () => {
         >
           <div className="glass-card p-8 md:p-12 relative">
             <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-primary to-secondary rounded-l-xl" />
-            <p className="font-body text-xl md:text-2xl text-foreground/90 leading-relaxed">
-              Seu site é rápido, mas sua foto é ruim?{" "}
-              <span className="text-primary font-medium">Você não vende.</span>{" "}
-              Sua foto é incrível, mas seu site não carrega?{" "}
-              <span className="text-secondary font-medium">Você não vende.</span>{" "}
-              Na Vértice, alinhamos as duas pontas da sua autoridade.
-            </p>
+            <div className="font-body text-xl md:text-2xl text-foreground/90 leading-relaxed space-y-4">
+              <p>Seu site é rápido, mas sua foto é ruim? <span className="text-primary font-medium">Você não vende.</span></p>
+              <p>Sua foto é incrível, mas seu site não carrega? <span className="text-secondary font-medium">Você não vende.</span></p>
+              <p>Na Vértice, alinhamos as duas pontas da sua autoridade.</p>
+            </div>
           </div>
         </motion.div>
 
