@@ -3,6 +3,7 @@ import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { MessageCircle, Instagram, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import logoVertice from "@/assets/logo-vertice.png";
 
 const FooterSection = () => {
   const ref = useRef(null);
@@ -79,10 +80,11 @@ const FooterSection = () => {
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             {/* Logo */}
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-                <span className="font-display text-xl font-bold text-background">V</span>
-              </div>
-              <span className="font-display text-xl font-semibold">Vértice</span>
+              <img 
+                src={logoVertice} 
+                alt="Vértice" 
+                className="h-10 w-auto object-contain"
+              />
             </div>
 
             {/* Copyright */}
