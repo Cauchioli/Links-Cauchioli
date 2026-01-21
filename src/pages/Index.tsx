@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
+import ConceitoSection from "@/components/ConceitoSection";
 import DiferencialSection from "@/components/DiferencialSection";
 import PortfolioSection from "@/components/PortfolioSection";
 // import FotografiaSection from "@/components/FotografiaSection"; // Temporariamente removido
@@ -11,6 +12,7 @@ const Index = () => {
     <main className="relative overflow-hidden">
       <Navbar />
       <HeroSection />
+      <ConceitoSection />
       <DiferencialSection />
       <PortfolioSection />
       {/* Seção de Fotografia temporariamente removida */}
