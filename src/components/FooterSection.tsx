@@ -40,7 +40,7 @@ const FooterSection = () => {
               className="group bg-green-600 hover:bg-green-700 text-white font-body text-base px-8 py-6 rounded-full transition-all duration-300"
             >
               <a 
-                href="https://wa.me/5515999999999" 
+                href="https://wa.me/5515996918236?text=Ol%C3%A1%2C%20vim%20pelo%20site%2C%20quero%20saber%20mais%20sobre%20a%20V%C3%A9rtice." 
                 target="_blank" 
                 rel="noopener noreferrer"
               >

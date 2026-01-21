@@ -5,6 +5,7 @@ import DiferencialSection from "@/components/DiferencialSection";
 import PortfolioSection from "@/components/PortfolioSection";
 // import FotografiaSection from "@/components/FotografiaSection"; // Temporariamente removido
 import SobreSection from "@/components/SobreSection";
+import ContatoSection from "@/components/ContatoSection";
 import FooterSection from "@/components/FooterSection";
 
 const Index = () => {
@@ -17,6 +18,7 @@ const Index = () => {
       <PortfolioSection />
       {/* Seção de Fotografia temporariamente removida */}
       <SobreSection />
+      <ContatoSection />
       <FooterSection />
     </main>
   );
