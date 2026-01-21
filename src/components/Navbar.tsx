@@ -79,7 +79,7 @@ const Navbar = () => {
                 size="sm"
                 className="bg-primary hover:bg-primary/90 text-primary-foreground font-body rounded-full px-6"
               >
-                <a href="https://wa.me/5515999999999" target="_blank" rel="noopener noreferrer">
+                <a href="https://wa.me/5515996918236?text=Ol%C3%A1%2C%20vim%20pelo%20site%2C%20quero%20saber%20mais%20sobre%20a%20V%C3%A9rtice." target="_blank" rel="noopener noreferrer">
                   Fale Comigo
                 </a>
               </Button>
@@ -121,7 +121,7 @@ const Navbar = () => {
                   asChild
                   className="bg-primary hover:bg-primary/90 text-primary-foreground font-body rounded-full mt-4"
                 >
-                  <a href="https://wa.me/5515999999999" target="_blank" rel="noopener noreferrer">
+                  <a href="https://wa.me/5515996918236?text=Ol%C3%A1%2C%20vim%20pelo%20site%2C%20quero%20saber%20mais%20sobre%20a%20V%C3%A9rtice." target="_blank" rel="noopener noreferrer">
                     Fale Comigo
                   </a>
                 </Button>
