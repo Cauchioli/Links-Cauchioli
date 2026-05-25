@@ -22,7 +22,7 @@ const steps = [
     id: "03",
     icon: Settings2,
     title: "Configuração & IA",
-    desc: "Montamos os ativos comerciais (deck, pitch de vendas, régua de 5 e-mails, FAQ de conteúdo) e configuramos a IA para reuniões operacionais e leitura de autos no NotebookLM.",
+    desc: "Montamos os ativos comerciais (deck, pitch de vendas, proposta premium, FAQ de conteúdo) e configuramos a IA para reuniões operacionais e leitura de autos no NotebookLM.",
     accent: "gold" as const,
   },
   {

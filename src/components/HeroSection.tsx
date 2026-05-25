@@ -246,7 +246,7 @@ const HeroSection = () => {
                             <FileText className="w-3 h-3 text-primary shrink-0" /> Deck Comercial
                           </span>
                           <span className="font-body text-muted-foreground flex items-center gap-1.5">
-                            <FileText className="w-3 h-3 text-primary shrink-0" /> Estudo de 5 E-mails
+                            <FileText className="w-3 h-3 text-primary shrink-0" /> Onboarding de Elite
                           </span>
                           <span className="font-body text-muted-foreground flex items-center gap-1.5">
                             <FileText className="w-3 h-3 text-primary shrink-0" /> Pitch de Vendas
