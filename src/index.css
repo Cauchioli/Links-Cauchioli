@@ -1,69 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    /* Deep Dark Theme - Tech Luxury */
-    --background: 222 47% 4%;
-    --foreground: 210 40% 98%;
+    /* ── Clean Light Theme ── */
+    --background: 40 25% 97%;        /* warm off-white #F9F8F6 */
+    --foreground: 222 30% 10%;       /* deep charcoal */
 
-    --card: 222 47% 6%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 100%;               /* pure white */
+    --card-foreground: 222 30% 10%;
 
-    --popover: 222 47% 6%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 30% 10%;
 
-    /* Gold Accent - Elegance/Photography */
-    --primary: 40 47% 55%;
-    --primary-foreground: 222 47% 4%;
+    /* Gold — richer/darker to read on white */
+    --primary: 38 72% 40%;
+    --primary-foreground: 0 0% 100%;
 
-    /* Cyber Blue - Tech/Web */
-    --secondary: 217 91% 60%;
-    --secondary-foreground: 222 47% 4%;
+    /* Navy — elegant second accent */
+    --secondary: 222 40% 22%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 217 33% 12%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 40 15% 93%;             /* very light warm gray */
+    --muted-foreground: 222 15% 48%; /* mid gray */
 
-    --accent: 217 33% 15%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 38 60% 94%;            /* very light gold tint */
+    --accent-foreground: 38 72% 35%;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 217 33% 15%;
-    --input: 217 33% 15%;
-    --ring: 40 47% 55%;
+    --border: 40 15% 87%;            /* subtle warm border */
+    --input: 40 15% 87%;
+    --ring: 38 72% 40%;
 
     --radius: 0.75rem;
 
-    /* Custom Design Tokens */
-    --gold: 40 47% 55%;
-    --gold-light: 40 50% 65%;
-    --gold-dark: 40 45% 45%;
-    
-    --cyber-blue: 217 91% 60%;
-    --cyber-cyan: 187 92% 50%;
-    
-    --slate-deep: 222 47% 4%;
-    --slate-900: 222 47% 6%;
-    --slate-800: 217 33% 12%;
-    --slate-700: 217 33% 17%;
-    
-    /* Gradients as CSS custom properties */
-    --gradient-dark: linear-gradient(180deg, hsl(222 47% 6%) 0%, hsl(222 47% 2%) 100%);
-    --gradient-gold: linear-gradient(135deg, hsl(40 47% 55%) 0%, hsl(40 50% 65%) 100%);
-    --gradient-cyber: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(187 92% 50%) 100%);
-    --gradient-radial: radial-gradient(ellipse at center, hsl(217 91% 60% / 0.1) 0%, transparent 70%);
+    /* Design Tokens */
+    --gold: 38 72% 40%;
+    --gold-light: 38 65% 55%;
+    --gold-dark: 38 80% 30%;
 
-    /* Glass Effect */
-    --glass-bg: hsl(210 40% 98% / 0.05);
-    --glass-border: hsl(210 40% 98% / 0.1);
-  }
+    --cyber-blue: 222 40% 22%;
+    --cyber-cyan: 222 45% 35%;
 
-  .dark {
-    --background: 222 47% 4%;
-    --foreground: 210 40% 98%;
+    --slate-deep: 222 30% 10%;
+    --slate-900: 222 25% 14%;
+    --slate-800: 222 20% 20%;
+    --slate-700: 222 18% 28%;
+
+    --gradient-gold: linear-gradient(135deg, hsl(38 72% 40%) 0%, hsl(38 65% 55%) 100%);
+    --gradient-dark: linear-gradient(135deg, hsl(222 30% 10%) 0%, hsl(222 40% 22%) 100%);
+    --gradient-radial: radial-gradient(ellipse at center, hsl(38 72% 40% / 0.06) 0%, transparent 70%);
   }
 }
 
@@ -74,6 +65,7 @@
 
   html {
     scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
   }
 
   body {
@@ -82,51 +74,62 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Outfit', sans-serif;
   }
 }
 
 @layer components {
+  /* Clean white card with subtle shadow */
   .glass-card {
-    background: hsl(210 40% 98% / 0.05);
-    backdrop-filter: blur(16px);
-    border: 1px solid hsl(210 40% 98% / 0.1);
-    border-radius: 0.75rem;
+    background: hsl(0 0% 100%);
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius);
+    box-shadow: 0 1px 4px 0 rgb(0 0 0 / 0.05), 0 1px 2px -1px rgb(0 0 0 / 0.04);
   }
 
   .glass-card-hover {
-    background: hsl(210 40% 98% / 0.05);
-    backdrop-filter: blur(16px);
-    border: 1px solid hsl(210 40% 98% / 0.1);
-    border-radius: 0.75rem;
-    transition: all 0.5s ease;
+    background: hsl(0 0% 100%);
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius);
+    box-shadow: 0 1px 4px 0 rgb(0 0 0 / 0.05), 0 1px 2px -1px rgb(0 0 0 / 0.04);
+    transition: all 0.3s ease;
   }
 
   .glass-card-hover:hover {
-    background: hsl(210 40% 98% / 0.1);
-    border-color: hsl(210 40% 98% / 0.2);
+    box-shadow: 0 12px 28px -6px rgb(0 0 0 / 0.1), 0 4px 8px -4px rgb(0 0 0 / 0.06);
+    border-color: hsl(var(--primary) / 0.35);
+    transform: translateY(-2px);
   }
 
+  /* Gold gradient text */
   .gradient-gold-text {
-    background: linear-gradient(135deg, hsl(40 47% 55%), hsl(40 50% 70%));
+    background: linear-gradient(135deg, hsl(38 72% 36%), hsl(38 68% 52%));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
 
+  /* Navy gradient text */
   .gradient-cyber-text {
-    background: linear-gradient(135deg, hsl(217 91% 60%), hsl(187 92% 60%));
+    background: linear-gradient(135deg, hsl(222 40% 18%), hsl(222 40% 32%));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
 
+  /* Subtle gold shadow */
   .glow-gold {
-    box-shadow: 0 0 40px hsl(40 47% 55% / 0.3);
+    box-shadow: 0 4px 20px hsl(38 72% 40% / 0.15);
   }
 
-  .glow-cyber {
-    box-shadow: 0 0 40px hsl(217 91% 60% / 0.3);
+  /* Section tag chip */
+  .section-tag {
+    @apply inline-block font-body text-xs uppercase tracking-[0.22em] text-primary mb-4;
+  }
+
+  /* Divider line with label */
+  .divider-line {
+    @apply h-px bg-border w-full;
   }
 
   .text-balance {
@@ -136,10 +139,25 @@
 
 @layer utilities {
   .font-display {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Outfit', sans-serif;
   }
 
   .font-body {
     font-family: 'Inter', sans-serif;
   }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.5);
 }

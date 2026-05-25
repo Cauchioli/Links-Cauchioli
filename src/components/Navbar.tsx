@@ -4,8 +4,13 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logoVertice from "@/assets/logo-vertice.png";
 
+const WHATSAPP_LINK =
+  "https://wa.me/5515996918236?text=Ol%C3%A1%2C%20vim%20pelo%20site%2C%20quero%20agendar%20uma%20sess%C3%A3o%20estrat%C3%A9gica.";
+
 const navLinks = [
   { label: "Início", href: "#" },
+  { label: "Diagnóstico", href: "#diagnostico" },
+  { label: "Pilares", href: "#pilares" },
   { label: "Portfólio", href: "#portfolio" },
   { label: "Sobre", href: "#sobre" },
 ];
@@ -37,29 +42,30 @@ const Navbar = () => {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.6 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled 
-            ? "py-4 bg-background/80 backdrop-blur-xl border-b border-border" 
-            : "py-6 bg-transparent"
+        transition={{ duration: 0.5 }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-400 ${
+          isScrolled
+            ? "py-3 bg-white/90 backdrop-blur-md border-b border-border shadow-sm"
+            : "py-5 bg-transparent"
         }`}
       >
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between">
             {/* Logo */}
             <button
               onClick={() => scrollToSection("#")}
               className="flex items-center gap-3 group"
+              aria-label="Vértice — Início"
             >
-              <img 
-                src={logoVertice} 
-                alt="Vértice" 
-                className="h-10 w-auto object-contain group-hover:scale-105 transition-transform"
+              <img
+                src={logoVertice}
+                alt="Vértice"
+                className="h-9 w-auto object-contain group-hover:opacity-80 transition-opacity"
               />
             </button>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-8">
+            <div className="hidden md:flex items-center gap-7">
               {navLinks.map((link) => (
                 <button
                   key={link.label}
@@ -67,30 +73,31 @@ const Navbar = () => {
                   className="font-body text-sm text-muted-foreground hover:text-foreground transition-colors relative group"
                 >
                   {link.label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-primary group-hover:w-full transition-all duration-300" />
+                  <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-primary group-hover:w-full transition-all duration-300" />
                 </button>
               ))}
             </div>
 
-            {/* CTA Button */}
+            {/* CTA */}
             <div className="hidden md:block">
               <Button
                 asChild
                 size="sm"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground font-body rounded-full px-6"
+                className="bg-primary hover:bg-primary/90 text-white font-body rounded-full px-5 py-2 text-sm shadow-sm shadow-primary/20 hover:shadow-md hover:shadow-primary/30 transition-all"
               >
-                <a href="https://wa.me/5515996918236?text=Ol%C3%A1%2C%20vim%20pelo%20site%2C%20quero%20saber%20mais%20sobre%20a%20V%C3%A9rtice." target="_blank" rel="noopener noreferrer">
-                  Fale Comigo
+                <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
+                  Sessão Estratégica
                 </a>
               </Button>
             </div>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile toggle */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 text-foreground"
+              className="md:hidden p-2 text-foreground rounded-lg hover:bg-muted transition-colors"
+              aria-label={isMobileMenuOpen ? "Fechar menu" : "Abrir menu"}
             >
-              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
@@ -100,31 +107,33 @@ const Navbar = () => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-x-0 top-[72px] z-40 bg-background/95 backdrop-blur-xl border-b border-border md:hidden"
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.22 }}
+            className="fixed inset-x-0 top-[60px] z-40 bg-white border-b border-border shadow-lg md:hidden"
           >
-            <div className="container mx-auto px-6 py-6">
-              <div className="flex flex-col gap-4">
+            <div className="container mx-auto px-4 py-5">
+              <div className="flex flex-col gap-1">
                 {navLinks.map((link) => (
                   <button
                     key={link.label}
                     onClick={() => scrollToSection(link.href)}
-                    className="font-body text-lg text-muted-foreground hover:text-foreground transition-colors py-2 text-left"
+                    className="font-body text-base text-muted-foreground hover:text-foreground hover:bg-muted transition-colors py-3 px-3 text-left rounded-lg"
                   >
                     {link.label}
                   </button>
                 ))}
-                <Button
-                  asChild
-                  className="bg-primary hover:bg-primary/90 text-primary-foreground font-body rounded-full mt-4"
-                >
-                  <a href="https://wa.me/5515996918236?text=Ol%C3%A1%2C%20vim%20pelo%20site%2C%20quero%20saber%20mais%20sobre%20a%20V%C3%A9rtice." target="_blank" rel="noopener noreferrer">
-                    Fale Comigo
-                  </a>
-                </Button>
+                <div className="pt-3 border-t border-border mt-2">
+                  <Button
+                    asChild
+                    className="w-full bg-primary hover:bg-primary/90 text-white font-body rounded-full py-5"
+                  >
+                    <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
+                      Sessão Estratégica
+                    </a>
+                  </Button>
+                </div>
               </div>
             </div>
           </motion.div>

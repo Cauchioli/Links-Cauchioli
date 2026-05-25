@@ -5,46 +5,41 @@ import { MessageCircle, Instagram, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logoVertice from "@/assets/logo-vertice.png";
 
+const WHATSAPP_LINK =
+  "https://wa.me/5515996918236?text=Ol%C3%A1%2C%20vim%20pelo%20site%2C%20quero%20saber%20mais%20sobre%20a%20V%C3%A9rtice.";
+
 const FooterSection = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <footer className="relative py-32 overflow-hidden" ref={ref}>
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-t from-card via-background to-background" />
-      
-      {/* Gradient Orbs */}
-      <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-secondary/10 rounded-full blur-3xl" />
+    <footer className="relative overflow-hidden bg-foreground text-background" ref={ref}>
+      {/* Subtle top border accent */}
+      <div className="h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent" />
 
-      <div className="relative z-10 container mx-auto px-6">
-        {/* CTA Section */}
+      <div className="container mx-auto px-4 sm:px-6 py-20 sm:py-28">
+        {/* CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.75 }}
+          className="text-center mb-16 sm:mb-20"
         >
-          <h2 className="font-display text-3xl md:text-5xl font-semibold mb-6">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold mb-5 leading-tight text-background">
             Seu negócio está pronto para o{" "}
-            <span className="gradient-gold-text">próximo nível</span>?
+            <span className="text-primary italic">próximo nível</span>?
           </h2>
-          <p className="font-body text-lg text-muted-foreground max-w-xl mx-auto mb-12">
-            Vamos conversar sobre como alinhar sua imagem e presença digital.
+          <p className="font-body text-base sm:text-lg text-background/60 max-w-md mx-auto mb-10">
+            Vamos conversar sobre como posicionar, automatizar e escalar o seu negócio com inteligência.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <Button
               asChild
               size="lg"
-              className="group bg-green-600 hover:bg-green-700 text-white font-body text-base px-8 py-6 rounded-full transition-all duration-300"
+              className="group w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white font-body text-base px-7 py-5 sm:py-6 rounded-full transition-all duration-300 shadow-lg shadow-green-600/20"
             >
-              <a 
-                href="https://wa.me/5515996918236?text=Ol%C3%A1%2C%20vim%20pelo%20site%2C%20quero%20saber%20mais%20sobre%20a%20V%C3%A9rtice." 
-                target="_blank" 
-                rel="noopener noreferrer"
-              >
+              <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
                 <MessageCircle className="mr-2 w-5 h-5" />
                 WhatsApp Direto
                 <ArrowUpRight className="ml-1 w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -55,13 +50,9 @@ const FooterSection = () => {
               asChild
               size="lg"
               variant="outline"
-              className="group border-primary/50 hover:border-primary hover:bg-primary/10 text-foreground font-body text-base px-8 py-6 rounded-full transition-all duration-300"
+              className="group w-full sm:w-auto border-background/20 hover:border-primary/50 hover:bg-primary/10 text-background font-body text-base px-7 py-5 sm:py-6 rounded-full transition-all duration-300"
             >
-              <a 
-                href="https://instagram.com/vertice" 
-                target="_blank" 
-                rel="noopener noreferrer"
-              >
+              <a href="https://instagram.com/vertice" target="_blank" rel="noopener noreferrer">
                 <Instagram className="mr-2 w-5 h-5" />
                 Instagram
                 <ArrowUpRight className="ml-1 w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -74,26 +65,19 @@ const FooterSection = () => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="pt-12 border-t border-border"
+          transition={{ duration: 0.75, delay: 0.3 }}
+          className="pt-8 border-t border-background/10"
         >
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            {/* Logo */}
-            <div className="flex items-center gap-3">
-              <img 
-                src={logoVertice} 
-                alt="Vértice" 
-                className="h-10 w-auto object-contain"
-              />
-            </div>
-
-            {/* Copyright */}
-            <p className="font-body text-sm text-muted-foreground text-center">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-5">
+            <img
+              src={logoVertice}
+              alt="Vértice"
+              className="h-8 w-auto object-contain opacity-70"
+            />
+            <p className="font-body text-sm text-background/40 text-center">
               © {new Date().getFullYear()} Vértice. Todos os direitos reservados.
             </p>
-
-            {/* Location */}
-            <p className="font-body text-sm text-muted-foreground">
+            <p className="font-body text-sm text-background/40">
               Itapetininga, SP – Brasil
             </p>
           </div>
