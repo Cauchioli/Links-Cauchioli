@@ -52,7 +52,7 @@ const FooterSection = () => {
               variant="outline"
               className="group w-full sm:w-auto border-background/20 hover:border-primary/50 hover:bg-primary/10 text-background font-body text-base px-7 py-5 sm:py-6 rounded-full transition-all duration-300"
             >
-              <a href="https://instagram.com/vertice" target="_blank" rel="noopener noreferrer">
+              <a href="https://instagram.com/leocauchiolli" target="_blank" rel="noopener noreferrer">
                 <Instagram className="mr-2 w-5 h-5" />
                 Instagram
                 <ArrowUpRight className="ml-1 w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
