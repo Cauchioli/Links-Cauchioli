@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import logoVertice from "@/assets/logo-vertice.png";
 
-const WHATSAPP_LINK =
-  "https://wa.me/5515996918236?text=Ol%C3%A1%2C%20vim%20pelo%20site%2C%20quero%20agendar%20uma%20sess%C3%A3o%20estrat%C3%A9gica.";
+const OBRIGADO_LINK = "/obrigado?origin=navbar";
 
 const navLinks = [
   { label: "Início", href: "#" },
@@ -85,9 +85,9 @@ const Navbar = () => {
                 size="sm"
                 className="bg-primary hover:bg-primary/90 text-white font-body rounded-full px-5 py-2 text-sm shadow-sm shadow-primary/20 hover:shadow-md hover:shadow-primary/30 transition-all"
               >
-                <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
+                <Link to={OBRIGADO_LINK}>
                   Sessão Estratégica
-                </a>
+                </Link>
               </Button>
             </div>
 
@@ -129,9 +129,9 @@ const Navbar = () => {
                     asChild
                     className="w-full bg-primary hover:bg-primary/90 text-white font-body rounded-full py-5"
                   >
-                    <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
+                    <Link to={OBRIGADO_LINK}>
                       Sessão Estratégica
-                    </a>
+                    </Link>
                   </Button>
                 </div>
               </div>

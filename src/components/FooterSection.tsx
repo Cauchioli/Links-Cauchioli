@@ -2,11 +2,11 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { MessageCircle, Instagram, ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import logoVertice from "@/assets/logo-vertice.png";
 
-const WHATSAPP_LINK =
-  "https://wa.me/5515996918236?text=Ol%C3%A1%2C%20vim%20pelo%20site%2C%20quero%20saber%20mais%20sobre%20a%20V%C3%A9rtice.";
+const OBRIGADO_LINK = "/obrigado?origin=footer";
 
 const FooterSection = () => {
   const ref = useRef(null);
@@ -39,11 +39,11 @@ const FooterSection = () => {
               size="lg"
               className="group w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white font-body text-base px-7 py-5 sm:py-6 rounded-full transition-all duration-300 shadow-lg shadow-green-600/20"
             >
-              <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
+              <Link to={OBRIGADO_LINK}>
                 <MessageCircle className="mr-2 w-5 h-5" />
                 WhatsApp Direto
                 <ArrowUpRight className="ml-1 w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-              </a>
+              </Link>
             </Button>
 
             <Button

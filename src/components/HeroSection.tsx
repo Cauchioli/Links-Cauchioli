@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Brain, Layers, MessageCircle, FileText, User, CheckCircle2, Terminal } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
-const WHATSAPP_LINK =
-  "https://wa.me/5515996918236?text=Ol%C3%A1%2C%20vim%20pelo%20site%2C%20quero%20agendar%20uma%20sess%C3%A3o%20estrat%C3%A9gica.";
+const OBRIGADO_LINK = "/obrigado?origin=hero";
 
 const HeroSection = () => {
   const [activeTab, setActiveTab] = useState<"dna" | "bio" | "ia">("dna");
@@ -97,10 +97,10 @@ const HeroSection = () => {
                 size="lg"
                 className="group bg-primary hover:bg-primary/90 text-white font-body text-sm sm:text-base px-7 py-5 sm:py-6 rounded-full shadow-md shadow-primary/20 transition-all duration-300 hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-0.5"
               >
-                <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
+                <Link to={OBRIGADO_LINK}>
                   <MessageCircle className="mr-2 w-4 h-4 sm:w-5 sm:h-5" />
                   Agendar Sessão Estratégica
-                </a>
+                </Link>
               </Button>
               <Button
                 onClick={scrollToPortfolio}

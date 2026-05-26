@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -18,8 +19,7 @@ const contactSchema = z.object({
 
 type ContactFormData = z.infer<typeof contactSchema>;
 
-const WHATSAPP_LINK =
-  "https://wa.me/5515996918236?text=Ol%C3%A1%2C%20vim%20pelo%20site%2C%20quero%20agendar%20uma%20sess%C3%A3o%20estrat%C3%A9gica.";
+const OBRIGADO_LINK = "/obrigado?origin=contato";
 
 const ContatoSection = () => {
   const ref = useRef(null);
@@ -203,7 +203,7 @@ const ContatoSection = () => {
                   </div>
                 </a>
 
-                <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 group">
+                <Link to={OBRIGADO_LINK} className="flex items-center gap-4 group">
                   <div className="w-11 h-11 rounded-xl bg-green-100 flex items-center justify-center group-hover:bg-green-200 transition-colors shrink-0">
                     <MessageCircle className="w-5 h-5 text-green-600" />
                   </div>
@@ -213,7 +213,7 @@ const ContatoSection = () => {
                       (15) 99691-8236
                     </p>
                   </div>
-                </a>
+                </Link>
               </div>
             </div>
 
