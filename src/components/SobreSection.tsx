@@ -26,12 +26,12 @@ const SobreSection = () => {
 
             <div className="space-y-4 font-body text-base sm:text-lg text-muted-foreground leading-relaxed mb-8">
               <p>
-                Com experiência prática unindo o marketing estratégico de alta conversão à engenharia de processos com Inteligência Artificial, 
-                ajudo marcas de serviço de elite a saírem do caos operacional.
+                A Vértice foi fundada por <strong>Léo Cauchioli</strong>, estrategista comercial de growth e estudante do último ano de Direito. 
+                Com formação certificada em Engenharia da Hipnose, Léo construiu sua carreira unindo o marketing de resposta direta 
+                à psicologia humana e à eficiência da Inteligência Artificial.
               </p>
               <p>
-                Nossa atuação mapeia o seu DNA Profundo de Marca, desenha sua Biografia de Autoridade para posicionamento de alto ticket, e implementa um ecossistema 
-                de IA sob medida (utilizando ferramentas como NotebookLM e Claude) para você recuperar até 20 horas semanais de tempo livre.
+                Após conciliar uma rotina exaustiva trabalhando como frentista e estudando à noite, Léo foi obrigado a dominar a automação operacional para sobreviver à escassez de tempo. Essa bagagem prática deu vida ao método Vértice: dar clareza estrutural e velocidade aos profissionais que estão hoje cegos pelo operacional.
               </p>
             </div>
 

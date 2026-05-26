@@ -101,6 +101,10 @@ const ConceitoSection = () => {
                 Significa trabalhar com mais inteligência.
               </span>
             </p>
+            <p className="font-body text-sm text-muted-foreground mt-4 italic">
+              "Arriscar é necessário para a alma, e não arriscar é pior do que morrer." — Søren Kierkegaard. 
+              Muitos profissionais liberais preferem a morte lenta do tempo consumido pelo operacional do que dar o passo em direção à soberania de suas próprias marcas.
+            </p>
           </div>
         </motion.div>
       </div>
