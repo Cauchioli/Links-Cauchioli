@@ -28,7 +28,7 @@ const links: LinkItem[] = [
     id: "site",
     title: "Site Oficial",
     subtitle: "Conheça nossa metodologia completa",
-    url: "/",
+    url: "/site",
     image: "/links/banner_site.png",
     borderColor: "#E5C158",
   },
