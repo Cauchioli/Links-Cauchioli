@@ -22,7 +22,7 @@ export default function Calculadora() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
   
-  // Inputs matching the Excel file: 'simulador-parceiros-indicacoes.xlsx'
+  // Inputs matching the Excel file: 'Simulador Financeiro Vértice - Pipeline, CMP e Previsibilidade.xlsx'
   const [custosDespesas, setCustosDespesas] = useState(5000); // R34: Custos + despesas
   const [processosMovimentados, setProcessosMovimentados] = useState(40); // R37: Quantidade de processos movimentados
   const [investimentoTrafego, setInvestimentoTrafego] = useState(1000); // Extra for traffic analysis
@@ -78,7 +78,7 @@ export default function Calculadora() {
           email,
           phone: whatsapp,
           "Formulário": "Calculadora de CMP e Tráfego",
-          "Lógica Planilha": "simulador-parceiros-indicacoes.xlsx",
+          "Lógica Planilha": "Simulador Financeiro Vértice - Pipeline, CMP e Previsibilidade.xlsx",
           "Custos + Despesas (R34)": `R$ ${custosDespesas}`,
           "Processos Movimentados por Mês (R37)": processosMovimentados,
           "Investimento em Tráfego": `R$ ${investimentoTrafego}`,
@@ -111,7 +111,7 @@ export default function Calculadora() {
     }).format(val);
   };
 
-  const waMessage = `Olá Leo! Fiz a simulação baseada no Simulador de Parceiros. Custos+Despesas: R$ ${custosDespesas}, Processos movimentados: ${processosMovimentados}, Tráfego: R$ ${investimentoTrafego}, Duração: ${duracaoMeses} meses. Meu CMP/mês deu ${formatCurrency(cmpPorMes)} e Custo Total do Processo: ${formatCurrency(custoTotalPeriodo)}. Quero agendar o diagnóstico estratégico.`;
+  const waMessage = `Olá Leo! Fiz a simulação do Custo Médio do Processo (CMP) do meu escritório. Custos+Despesas: R$ ${custosDespesas}, Processos movimentados: ${processosMovimentados}, Tráfego: R$ ${investimentoTrafego}, Duração: ${duracaoMeses} meses. Meu CMP/mês estimado deu ${formatCurrency(cmpPorMes)} e Custo Total do Processo: ${formatCurrency(custoTotalPeriodo)}. Quero agendar o diagnóstico estratégico.`;
   const waUrl = `https://wa.me/5515996918236?text=${encodeURIComponent(waMessage)}`;
 
   return (
@@ -546,7 +546,7 @@ export default function Calculadora() {
                   </div>
                   <h2 className="text-xl font-bold font-display text-white">Mapeamento de CMP Finalizado</h2>
                   <p className="text-xs text-white/50">
-                    Lógica integrada ao seu <strong>Simulador de Parceiros</strong>.
+                    Lógica integrada ao <strong>Simulador Financeiro Vértice</strong>.
                   </p>
                 </div>
 
