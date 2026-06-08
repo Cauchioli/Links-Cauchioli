@@ -171,13 +171,16 @@ export default function Calculadora() {
                 exit={{ opacity: 0, x: -20 }}
                 className="space-y-6"
               >
-                <div className="space-y-2">
+                <div className="space-y-3">
+                  <span className="inline-block text-[9px] bg-amber-500/10 text-amber-500 border border-amber-500/20 px-2 py-0.5 rounded font-black uppercase tracking-widest">
+                    Simulação Rápida
+                  </span>
                   <h2 className="text-xl font-bold font-display text-white">Custos + Despesas</h2>
-                  <p className="text-sm text-white/60 leading-relaxed">
-                    Qual é o valor total de **Custos + Despesas** operacionais mensais do seu escritório?
+                  <p className="text-xs text-white/50 leading-relaxed">
+                    Este teste é uma estimativa simplificada para você ter uma noção do seu custo operacional por processo. O diagnóstico completo e exato é refinado na sessão de consultoria estratégica.
                   </p>
-                  <p className="text-xs text-white/40 italic">
-                    (Equipe/sócios, aluguel, sistemas, luz, telefone e custos fixos gerais)
+                  <p className="text-sm text-white/60 leading-relaxed pt-1">
+                    Qual é o valor de **Custos + Despesas** operacionais mensais do seu escritório?
                   </p>
                 </div>
 
@@ -264,12 +267,20 @@ export default function Calculadora() {
                     </div>
                   </div>
                   
-                  {/* Helper note */}
-                  <div className="bg-amber-500/5 border border-amber-500/10 rounded-xl p-3 flex gap-2">
-                    <Search className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
-                    <p className="text-[11px] text-white/50 leading-normal">
-                      <strong>Importante:</strong> Não coloque o total de processos ativos da sua carteira, mas sim o volume de movimentações de trabalho executadas no mês. Se não souber o número exato, coloque uma estimativa. Nós te ajudamos a metrificá-las na sessão estratégica.
-                    </p>
+                  {/* Helper notes */}
+                  <div className="bg-amber-500/5 border border-amber-500/10 rounded-xl p-3.5 space-y-3">
+                    <div className="flex gap-2">
+                      <Search className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+                      <p className="text-[11px] text-white/50 leading-normal">
+                        <strong>Importante:</strong> Não coloque o total de processos ativos, mas sim o volume de trabalho mensal. Se não souber, use uma estimativa; ajudamos a metrificá-la na sessão estratégica.
+                      </p>
+                    </div>
+                    <div className="border-t border-white/5 pt-2 flex gap-2">
+                      <AlertTriangle className="w-4 h-4 text-amber-500 shrink-0 mt-0.5 animate-pulse" />
+                      <p className="text-[11px] text-white/55 leading-normal">
+                        <strong>Reflexão de Eficiência:</strong> A depender do número de funcionários contratados, se você realiza apenas **de 10 a 20 prazos e movimentações por mês**, vale refletir se há necessidade de uma equipe desse tamanho ou se há ociosidade operacional oculta.
+                      </p>
+                    </div>
                   </div>
                 </div>
 
