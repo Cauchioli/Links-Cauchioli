@@ -13,7 +13,9 @@ import {
   Search,
   Activity,
   Zap,
-  Loader2
+  Loader2,
+  BookOpen,
+  ExternalLink
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -607,6 +609,37 @@ export default function Calculadora() {
                       <p className="text-[11px] text-white/60 leading-normal">
                         Na advocacia de êxito, é normal não cobrar honorários iniciais. Contudo, manter este processo ativo consome aproximadamente <strong className="text-white">{formatCurrency(cmpPorMes)}/mês</strong> de estrutura. Ao receber o êxito final, lembre-se de separar primeiro o custo acumulado de <strong className="text-white">{formatCurrency(custoTotalPeriodo)}</strong> para cobrir a estrutura da banca antes de contabilizar seu lucro real. Este custo operacional é diluído entre os seus demais processos ativos.
                       </p>
+                    </div>
+                  </div>
+
+                  {/* Guia de Precificação Offer (Order Bump / Upsell) */}
+                  <div className="bg-gradient-to-br from-[#C8A45A]/5 to-[#8B6914]/15 border border-[#C8A45A]/25 rounded-2xl p-5 text-left relative overflow-hidden mt-4">
+                    <div className="absolute -top-3 -right-3 w-16 h-16 bg-[#C8A45A]/5 rounded-full blur-xl pointer-events-none" />
+                    <div className="flex items-start gap-4">
+                      <div className="bg-[#C8A45A]/10 border border-[#C8A45A]/20 p-2.5 rounded-xl text-[#C8A45A] shrink-0">
+                        <BookOpen size={20} />
+                      </div>
+                      <div className="space-y-2 flex-1">
+                        <span className="text-[9px] bg-[#C8A45A]/15 text-[#C8A45A] px-2 py-0.5 rounded-md font-bold uppercase tracking-wider inline-block">Recomendado</span>
+                        <h4 className="text-sm font-bold text-white leading-tight">Quer aprender a precificar de verdade?</h4>
+                        <p className="text-[11px] text-white/60 leading-relaxed">
+                          Garanta o <strong>Guia de Precificação Jurídica (Hora Base & CMP)</strong>. O passo a passo completo para precificar qualquer caso, proteger seu caixa e cobrar o que vale.
+                        </p>
+                        <div className="pt-2 flex items-center justify-between gap-4">
+                          <div>
+                            <span className="text-[10px] text-white/40 block leading-none mb-1">Apenas</span>
+                            <span className="text-base font-extrabold text-[#C8A45A]">R$ 47</span>
+                          </div>
+                          <a
+                            href="https://pay.kiwify.com.br/4tbxxak"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="bg-[#C8A45A] hover:bg-[#C8A45A]/90 text-black text-[11px] font-black px-4 py-2.5 rounded-lg transition-all flex items-center gap-1.5 uppercase tracking-wide"
+                          >
+                            Quero o Guia <ExternalLink size={12} />
+                          </a>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

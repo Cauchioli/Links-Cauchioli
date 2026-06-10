@@ -45,7 +45,7 @@ const links: LinkItem[] = [
     id: "precificacao",
     title: "Guia de Precificação Jurídica",
     subtitle: "Hora Base & CMP · R$ 47",
-    url: "#",
+    url: "https://pay.kiwify.com.br/4tbxxak",
     image: "/links/banner_precificacao.png",
     borderColor: "#B8860B",
   },
