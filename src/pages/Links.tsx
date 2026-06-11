@@ -51,9 +51,9 @@ const links: LinkItem[] = [
   },
   {
     id: "ia",
-    title: "IA no Escritório",
-    subtitle: "4 Playbooks operacionais · R$ 97",
-    url: "#",
+    title: "PRINCIPIUM™",
+    subtitle: "Doutrina de Posicionamento & IA · R$ 197",
+    url: "https://pay.kiwify.com.br/gQYe5Fx",
     image: "/links/banner_ia.png",
     borderColor: "#4A90D9",
   },
