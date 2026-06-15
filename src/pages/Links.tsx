@@ -14,15 +14,15 @@ interface LinkItem {
 
 const links: LinkItem[] = [
   {
-    id: "assessoria",
-    title: "Assessoria Vértice",
-    subtitle: "Diagnóstico gratuito · 15 min · Vagas limitadas",
+    id: "whatsapp",
+    title: "WhatsApp",
+    subtitle: "Conversar no WhatsApp",
     url: "https://wa.me/5515996918236?text=Ol%C3%A1%20L%C3%A9o%2C%20vim%20pelo%20seu%20link%20na%20bio%20e%20quero%20fazer%20o%20diagn%C3%B3stico%20gratuito.",
-    image: "/links/banner_assessoria.png",
+    image: "/links/banner_whatsapp.png",
     borderColor: "#C8A45A",
     pulse: true,
     featured: true,
-    badge: "Assessoria",
+    badge: "Contato",
   },
   {
     id: "site",
@@ -52,7 +52,7 @@ const links: LinkItem[] = [
   {
     id: "ia",
     title: "PRINCIPIUM™",
-    subtitle: "Doutrina de Posicionamento & IA · R$ 197",
+    subtitle: "Doutrina de Posicionamento & IA · R$ 97",
     url: "https://pay.kiwify.com.br/gQYe5Fx",
     image: "/links/banner_ia.png",
     borderColor: "#4A90D9",
