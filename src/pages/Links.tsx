@@ -33,6 +33,15 @@ const links: LinkItem[] = [
     borderColor: "#E5C158",
   },
   {
+    id: "iscas",
+    title: "Biblioteca de Playbooks & Iscas",
+    subtitle: "Acesse nossos materiais e guias de processos e IA · Grátis",
+    url: "/iscas",
+    image: "/links/banner_iscas.png",
+    borderColor: "#C8A45A",
+    badge: "Downloads",
+  },
+  {
     id: "cmp",
     title: "Calculadora de CMP",
     subtitle: "Descubra o custo real do seu escritório · Grátis",

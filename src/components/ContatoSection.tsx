@@ -13,33 +13,55 @@ const OBRIGADO_LINK = "/obrigado?origin=contato";
 
 const questions = [
   {
-    id: "desafio",
-    question: "Qual é o seu maior desafio hoje?",
+    id: "area",
+    question: "Qual é a principal área de atuação ou especialidade do seu escritório?",
     options: [
-      "Cobrar mais sem perder clientes",
-      "Gerar autoridade e visibilidade online",
-      "Organizar a operação com IA",
-      "Sair da dependência de indicações",
+      "Direito Civil / Família / Sucessões",
+      "Direito do Trabalho",
+      "Direito do Consumidor",
+      "Direito Tributário / Empresarial",
+      "Direito Penal",
+      "Direito Previdenciário",
+      "Outra",
     ],
   },
   {
-    id: "horas",
-    question: "Quanto tempo semanal você gasta em tarefas operacionais repetitivas?",
+    id: "equipe",
+    question: "Quantas pessoas atuam na entrega jurídica e no comercial hoje?",
     options: [
-      "Menos de 5h por semana",
-      "Entre 5h e 15h por semana",
-      "Mais de 15h por semana",
-      "Não sei mensurar",
+      "Apenas eu (Autônomo)",
+      "2 a 3 pessoas",
+      "4 a 9 pessoas",
+      "10 ou mais pessoas",
     ],
   },
   {
-    id: "ia",
-    question: "Já tentou implementar alguma ferramenta de IA ou automação?",
+    id: "clientes",
+    question: "Em média, quantos novos contratos/clientes vocês fecham por mês?",
     options: [
-      "Sim, mas não funcionou como esperado",
-      "Tentei, mas desisti no caminho",
-      "Não, ainda não tentei",
-      "Sim, funciona — mas quero ir além",
+      "Menos de 2 novos clientes",
+      "2 a 5 novos clientes",
+      "6 a 10 novos clientes",
+      "Mais de 10 novos clientes",
+    ],
+  },
+  {
+    id: "ticket",
+    question: "Qual é o valor médio dos seus honorários por contrato?",
+    options: [
+      "Até R$ 1.500,00",
+      "R$ 1.500,00 a R$ 3.000,00",
+      "R$ 3.000,00 a R$ 5.000,00",
+      "Acima de R$ 5.000,00",
+    ],
+  },
+  {
+    id: "gargalo",
+    question: "Qual é o maior gargalo que impede o seu escritório de escalar hoje?",
+    options: [
+      "Falta de tempo / Sobrecarga com tarefas manuais e burocráticas (petições, relatórios)",
+      "Dificuldade de captação de clientes e concorrência por preço",
+      "Desorganização operacional / Falta de processos claros para o time",
     ],
   },
 ];
@@ -50,15 +72,16 @@ const ContatoSection = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
 
-  const [step, setStep] = useState(0); // 0-2 = questions, 3 = contact info
+  const [step, setStep] = useState(0); // 0-4 = questions, 5 = contact info
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [message, setMessage] = useState("");
+  const [instagram, setInstagram] = useState("");
+  const [iaTools, setIaTools] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const totalSteps = questions.length; // 3 questions, then contact
+  const totalSteps = questions.length; // 5 questions, then contact
   const progress = (step / (totalSteps + 1)) * 100;
 
   const handleNext = () => {
@@ -81,10 +104,13 @@ const ContatoSection = () => {
         body: JSON.stringify({
           name,
           phone,
-          "Mensagem adicional": message || "—",
-          "Maior desafio": answers.desafio,
-          "Horas operacionais semanais": answers.horas,
-          "Experiência com IA": answers.ia,
+          instagram: instagram || "—",
+          ia_tools: iaTools || "—",
+          "Área de Atuação": answers.area,
+          "Tamanho da Equipe": answers.equipe,
+          "Contratos por Mês": answers.clientes,
+          "Ticket Médio": answers.ticket,
+          "Maior Gargalo": answers.gargalo,
         }),
       });
       if (response.ok) {
@@ -124,7 +150,7 @@ const ContatoSection = () => {
             a conversa começa agora.
           </h2>
           <p className="font-body text-base sm:text-lg text-muted-foreground max-w-xl mx-auto">
-            3 perguntas rápidas para que a sessão estratégica seja exatamente o que você precisa.
+            Faça um pré-diagnóstico rápido para direcionar o seu atendimento de escala.
           </p>
         </motion.div>
 
@@ -269,15 +295,27 @@ const ContatoSection = () => {
                         />
                       </div>
                       <div className="space-y-1.5">
-                        <Label htmlFor="qual-message" className="font-body text-sm text-foreground font-medium">
-                          Quer adicionar algo? <span className="text-muted-foreground font-normal">(opcional)</span>
+                        <Label htmlFor="qual-instagram" className="font-body text-sm text-foreground font-medium">
+                          Instagram Profissional ou Site
+                        </Label>
+                        <Input
+                          id="qual-instagram"
+                          value={instagram}
+                          onChange={(e) => setInstagram(e.target.value)}
+                          placeholder="@seuconsultorio ou link"
+                          className="font-body bg-background border-border focus:border-primary h-11"
+                        />
+                      </div>
+                      <div className="space-y-1.5">
+                        <Label htmlFor="qual-iatools" className="font-body text-sm text-foreground font-medium">
+                          Já usa alguma IA ou ferramenta? (opcional)
                         </Label>
                         <Textarea
-                          id="qual-message"
-                          value={message}
-                          onChange={(e) => setMessage(e.target.value)}
-                          placeholder="Contexto extra, dúvida específica, ou qualquer coisa que ajude a sessão ser mais assertiva..."
-                          rows={3}
+                          id="qual-iatools"
+                          value={iaTools}
+                          onChange={(e) => setIaTools(e.target.value)}
+                          placeholder="Ex: ChatGPT, Claude, Astrea, etc..."
+                          rows={2}
                           className="font-body bg-background border-border focus:border-primary resize-none"
                         />
                       </div>
