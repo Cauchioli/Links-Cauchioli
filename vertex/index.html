@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VERTEX — Ecossistema de Inteligência & Tração</title>
+<link rel="icon" type="image/png" href="../assets/images/vertex-owl-symbol-dark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -90,10 +91,8 @@ header {
 }
 
 .brand-header-img {
-  height: 32px;
-  width: 32px;
-  border-radius: 50%;
-  object-fit: cover;
+  height: 34px;
+  width: auto;
 }
 
 .nav-links {
@@ -278,6 +277,16 @@ section {
   text-align: center;
 }
 
+.hero-logo-wrapper {
+  max-width: 140px;
+  margin-bottom: 28px;
+}
+
+.hero-logo-img {
+  width: 100%;
+  height: auto;
+}
+
 .hero-title {
   font-family: var(--font-display);
   font-size: clamp(2.5rem, 5.5vw, 4.8rem);
@@ -438,7 +447,7 @@ section {
   background: var(--bg-card);
   border-radius: var(--radius-card);
   padding: 36px;
-  transition: all 0.25 ease;
+  transition: all 0.25s ease;
 }
 
 .eco-pillar-card:hover {
@@ -460,6 +469,96 @@ section {
   margin-bottom: 20px;
 }
 
+.eco-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-top: 1px solid var(--border-dark);
+  padding-top: 16px;
+}
+
+.eco-features li {
+  font-size: 13px;
+  color: var(--text-white);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.eco-check-icon {
+  width: 14px;
+  height: 14px;
+  stroke: var(--accent-red);
+  stroke-width: 2.5;
+  fill: none;
+  flex-shrink: 0;
+}
+
+.vertex-box {
+  text-align: center;
+  padding: 60px 0;
+}
+
+.vertex-vector-img {
+  max-width: 280px;
+  margin: 0 auto 28px;
+  display: block;
+}
+
+.vertex-vector-img img {
+  width: 100%;
+  height: auto;
+}
+
+.vertex-quote {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+  font-weight: 500;
+  max-width: 820px;
+  margin: 0 auto;
+  line-height: 1.35;
+}
+
+.vertex-quote em {
+  color: var(--accent-red);
+  font-style: normal;
+}
+
+.journey-timeline {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.timeline-card {
+  border: 1px solid var(--border-dark);
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  padding: 28px 24px;
+}
+
+.timeline-step-num {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-red);
+  margin-bottom: 12px;
+  font-family: var(--font-mono);
+}
+
+.timeline-step-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.timeline-step-desc {
+  font-size: 13px;
+  color: var(--text-gray);
+  line-height: 1.6;
+}
+
 .deliv-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -471,6 +570,27 @@ section {
   background: var(--bg-card);
   border-radius: var(--radius-card);
   padding: 28px;
+}
+
+.deliv-tag {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent-red);
+  margin-bottom: 10px;
+  font-family: var(--font-mono);
+}
+
+.deliv-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.deliv-desc {
+  font-size: 13px;
+  color: var(--text-gray);
+  line-height: 1.6;
 }
 
 .manifesto-box {
@@ -498,7 +618,29 @@ footer {
   padding: 80px 8% 40px;
   border-top: 1px solid var(--border-dark);
   background: var(--bg-black);
-  text-align: center;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.footer-logo {
+  max-width: 220px;
+}
+
+.footer-logo img {
+  width: 100%;
+  height: auto;
+}
+
+.footer-bottom {
+  border-top: 1px solid var(--border-dark);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
   font-size: 12px;
   color: var(--text-muted);
 }
@@ -507,7 +649,8 @@ footer {
   header { padding: 14px 20px; }
   .nav-links, .journey-bar { display: none; }
   section { padding: 70px 5%; }
-  .wizard-content, .eco-pillars-grid, .deliv-grid { grid-template-columns: 1fr; }
+  .wizard-content, .eco-pillars-grid, .deliv-grid, .journey-timeline { grid-template-columns: 1fr; }
+  .footer-top { flex-direction: column; gap: 20px; text-align: center; }
 }
 </style>
 </head>
@@ -517,8 +660,7 @@ footer {
 
 <header>
   <a href="../index.html" class="brand">
-    <img src="../links/foto_perfil.jpg" alt="VERTEX Logo" class="brand-header-img">
-    <span style="font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:16px; color:#FFF;">VERTEX</span>
+    <img src="../assets/images/vertex-logo-header-horizontal.png" alt="VERTEX Logo" class="brand-header-img">
   </a>
 
   <ul class="nav-links">
@@ -561,7 +703,12 @@ footer {
 
 <main>
 
+  <!-- HERO -->
   <section class="hero" id="hero">
+    <div class="hero-logo-wrapper">
+      <img src="../assets/images/vertex-logo-hero-standalone.png" alt="VERTEX Emblem" class="hero-logo-img">
+    </div>
+
     <div class="pill-badge">DO CAOS À CLAREZA ESTRATÉGICA</div>
     <h1 class="hero-title">O Ecossistema Completo de Inteligência & Tração.</h1>
     <p class="hero-desc">
@@ -573,6 +720,7 @@ footer {
     </div>
   </section>
 
+  <!-- 01. DIAGNÓSTICO INTERATIVO -->
   <section id="diagnosis">
     <div class="pill-badge">01. DIAGNÓSTICO INTERATIVO</div>
     <h2 class="section-title">Qual é o Maior Desafio do Seu Negócio Hoje?</h2>
@@ -614,6 +762,7 @@ footer {
     </div>
   </section>
 
+  <!-- 02. OS 4 PILARES DO ECOSSISTEMA -->
   <section id="solutions">
     <div class="pill-badge">02. OS 4 PILARES DO ECOSSISTEMA</div>
     <h2 class="section-title">Uma Infraestrutura Completa sob Medida.</h2>
@@ -623,27 +772,137 @@ footer {
       <div class="eco-pillar-card">
         <h3 class="eco-title">VERTEX OS</h3>
         <p class="eco-desc">Sistema Operacional Privado instalado na sua máquina. Organiza seu conhecimento interno, gera atas de reunião e propostas A4 timbradas de forma automática.</p>
+        <ul class="eco-features">
+          <li><svg class="eco-check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Base de conhecimento 100% privada (Sem vazamento)</li>
+          <li><svg class="eco-check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Atas e resumos de reuniões em 45 segundos</li>
+          <li><svg class="eco-check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Geração automática de propostas comerciais</li>
+        </ul>
       </div>
 
       <div class="eco-pillar-card">
         <h3 class="eco-title">VERTEX BOUTIQUE AGENCY</h3>
         <p class="eco-desc">Produção audiovisual cinematográfica e engenharia web de alto status. Criamos sites boutique ultrarrápidos em HTML/Vite e gerenciamos anúncios de precisão no Google Ads.</p>
+        <ul class="eco-features">
+          <li><svg class="eco-check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Sites Boutique em HTML/Vite de alta performance</li>
+          <li><svg class="eco-check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Produção audiovisual cinematográfica executiva</li>
+          <li><svg class="eco-check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Google Ads sem desperdício de verba</li>
+        </ul>
       </div>
 
       <div class="eco-pillar-card">
-        <div class="eco-title">VERTEX ADVISORY</div>
+        <h3 class="eco-title">VERTEX ADVISORY</h3>
         <p class="eco-desc">Fractional CMO e governança comercial. Padronizamos o atendimento da secretária/SDR no WhatsApp e orientamos a pivotagem para clientes de alta margem.</p>
+        <ul class="eco-features">
+          <li><svg class="eco-check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Orientação estratégica e Fractional CMO</li>
+          <li><svg class="eco-check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Script de atendimento e triagem no WhatsApp</li>
+          <li><svg class="eco-check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Pivotagem para nichos de alto ticket</li>
+        </ul>
       </div>
 
       <div class="eco-pillar-card">
-        <div class="eco-title">VERTEX ACADEMY</div>
+        <h3 class="eco-title">VERTEX ACADEMY</h3>
         <p class="eco-desc">O braço educacional para capacitação da sua equipe. Kits de IA no Escritório (produtos educacionais de entrada) e imersões de formação contínua.</p>
+        <ul class="eco-features">
+          <li><svg class="eco-check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Kit IA no Escritório (Educação prática)</li>
+          <li><svg class="eco-check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Imersões e treinamentos para a equipe</li>
+          <li><svg class="eco-check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Autonomia operacional garantida</li>
+        </ul>
       </div>
     </div>
   </section>
 
+  <!-- O VETOR VERTEX -->
+  <section id="vertex">
+    <div class="vertex-box">
+      <div class="vertex-vector-img">
+        <img src="../assets/images/vertex-logo-white-vector.png" alt="O Vetor Vertex">
+      </div>
+      <h2 class="vertex-quote">
+        "O instante em que a necessidade da sua empresa encontra a solução exata sem ruído nem desperdício é chamado de <em>Vertex</em>."
+      </h2>
+    </div>
+  </section>
+
+  <!-- 03. COMO FUNCIONA A JORNADA -->
+  <section id="journey">
+    <div class="pill-badge">03. COMO FUNCIONA A JORNADA</div>
+    <h2 class="section-title">Quatro Passos Simples para a Sua Transformação.</h2>
+    <p class="section-subtitle">Uma esteira clara e previsível de implementação que garante resultados desde a primeira semana.</p>
+
+    <div class="journey-timeline">
+      <div class="timeline-card">
+        <div class="timeline-step-num">FASE 01</div>
+        <div class="timeline-step-title">Diagnóstico de DNA</div>
+        <div class="timeline-step-desc">Mapeamos a rotina, o tom de voz e o acervo histórico da sua empresa.</div>
+      </div>
+
+      <div class="timeline-card">
+        <div class="timeline-step-num">FASE 02</div>
+        <div class="timeline-step-title">Ativação do Vertex OS</div>
+        <div class="timeline-step-desc">Instalamos a IA privada local para liberar seu tempo de tarefas repetitivas.</div>
+      </div>
+
+      <div class="timeline-card">
+        <div class="timeline-step-num">FASE 03</div>
+        <div class="timeline-step-title">Presença Boutique</div>
+        <div class="timeline-step-desc">Construímos seu site ultrarrápido e alinhamos a presença audiovisual de autoridade.</div>
+      </div>
+
+      <div class="timeline-card">
+        <div class="timeline-step-num">FASE 04</div>
+        <div class="timeline-step-title">Escala & Governança</div>
+        <div class="timeline-step-desc">Acompanhamos a otimização comercial do seu atendimento e a atração de clientes.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04. O QUE VOCÊ RECEBE -->
+  <section id="deliverables">
+    <div class="pill-badge">04. O QUE VOCÊ RECEBE</div>
+    <h2 class="section-title">Entregáveis Práticos e Tangíveis.</h2>
+
+    <div class="deliv-grid">
+      <div class="deliv-card">
+        <div class="deliv-tag">WEB</div>
+        <div class="deliv-title">Sites Boutique em HTML/Vite</div>
+        <div class="deliv-desc">Páginas modernas e ultrarrápidas que posicionam seu negócio como líder de mercado.</div>
+      </div>
+
+      <div class="deliv-card">
+        <div class="deliv-tag">AUDIOVISUAL</div>
+        <div class="deliv-title">Produção Cinematográfica</div>
+        <div class="deliv-desc">Vídeos autorais e retratos corporativos executivos que passam autoridade imediata.</div>
+      </div>
+
+      <div class="deliv-card">
+        <div class="deliv-tag">TRÁFEGO</div>
+        <div class="deliv-title">Google Ads de Precisão</div>
+        <div class="deliv-desc">Campanhas configuradas para atrair apenas termos de alta intenção de contratação.</div>
+      </div>
+
+      <div class="deliv-card">
+        <div class="deliv-tag">IA PRIVADA</div>
+        <div class="deliv-title">Gerador de Propostas A4</div>
+        <div class="deliv-desc">Crie propostas comerciais timbradas e elegantes em menos de 1 minuto.</div>
+      </div>
+
+      <div class="deliv-card">
+        <div class="deliv-tag">AUTOMAÇÃO</div>
+        <div class="deliv-title">Atas de Reunião em 45s</div>
+        <div class="deliv-desc">Transcreva áudios e extraia tarefas de reuniões sem perder tempo anotando.</div>
+      </div>
+
+      <div class="deliv-card">
+        <div class="deliv-tag">COMERCIAL</div>
+        <div class="deliv-title">Script de Atendimento SDR</div>
+        <div class="deliv-desc">Fluxo claro no WhatsApp para sua equipe filtrar curiosos e fechar contratos.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05. NOSSA VISÃO -->
   <section id="manifesto">
-    <div class="pill-badge">03. NOSSA VISÃO</div>
+    <div class="pill-badge">05. NOSSA VISÃO</div>
     <div class="manifesto-box">
       <h2 class="manifesto-unified-text">
         "Conectamos o <span style="color:#AAA;">caos de informações</span>, presença e atendimento da sua empresa até que todo o ruído desapareça e a clareza se transforme em <em>autoridade, tempo e escala</em>."
@@ -657,7 +916,18 @@ footer {
 </main>
 
 <footer>
-  ECOSSISTEMA VERTEX © 2026. TODOS OS DIREITOS RESERVADOS.
+  <div class="footer-top">
+    <div class="footer-logo">
+      <img src="../assets/images/vertex-logo-header-horizontal.png" alt="VERTEX Logo">
+    </div>
+
+    <a href="#diagnosis" class="btn-cta">Fazer Diagnóstico Gratuito</a>
+  </div>
+
+  <div class="footer-bottom">
+    <span>ECOSSISTEMA VERTEX</span>
+    <span>© 2026 VERTEX. TODOS OS DIREITOS RESERVADOS.</span>
+  </div>
 </footer>
 
 <script>
