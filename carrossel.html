@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VÉRTICE — Carrossel Interativo // Entender Antes de Vender</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-dark: #080808;
+  --bg-card: #111113;
+  --text-white: #F9F9FB;
+  --text-gray: #A1A1AA;
+  --text-muted: #52525B;
+  --accent-red: #E11D48;
+  --accent-red-soft: rgba(225, 29, 72, 0.14);
+  --border-dark: #222226;
+  --border-light: #333338;
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'Geist Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-white);
+  font-family: var(--font-body);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px 80px;
+  min-height: 100vh;
+}
+
+.preview-header {
+  text-align: center;
+  max-width: 720px;
+  margin-bottom: 30px;
+}
+
+.preview-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent-red-soft);
+  color: var(--accent-red);
+  border: 1px solid rgba(225, 29, 72, 0.3);
+  padding: 6px 16px;
+  border-radius: 30px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  font-family: var(--font-mono);
+}
+
+.preview-title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.preview-subtitle {
+  font-size: 14px;
+  color: var(--text-gray);
+}
+
+.controls-hint {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+/* CARROSSEL VIEWPORT */
+.carousel-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1080px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.carousel-viewport {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  padding: 20px 10px;
+  width: 100%;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-red) var(--bg-dark);
+}
+
+.carousel-viewport::-webkit-scrollbar {
+  height: 6px;
+}
+.carousel-viewport::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+.carousel-viewport::-webkit-scrollbar-thumb {
+  background: var(--accent-red);
+  border-radius: 4px;
+}
+
+/* SLIDE 4:5 INSTAGRAM (440px x 550px scale) */
+.slide {
+  scroll-snap-align: center;
+  width: 440px;
+  height: 550px;
+  flex-shrink: 0;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-dark);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+}
+
+.slide-img-cover {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 50%;
+  object-fit: cover;
+  filter: brightness(0.75);
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%);
+}
+
+.slide-header {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.slide-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--accent-red);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.slide-brand {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-white);
+  opacity: 0.8;
+}
+
+.slide-body {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.slide-title {
+  font-family: var(--font-display);
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--text-white);
+}
+
+.slide-subtitle {
+  font-size: 13px;
+  color: var(--text-gray);
+  line-height: 1.55;
+}
+
+.slide-box {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 12.5px;
+  color: var(--text-gray);
+  line-height: 1.6;
+}
+
+.slide-box highlight {
+  color: var(--accent-red);
+  font-weight: 600;
+}
+
+.slide-footer {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--border-dark);
+  padding-top: 16px;
+}
+
+.slide-handle {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.slide-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent-red);
+}
+
+.progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: var(--accent-red);
+}
+
+/* NAV BUTTONS */
+.nav-btn-container {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.nav-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border-dark);
+  color: var(--text-white);
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-btn:hover {
+  border-color: var(--accent-red);
+  background: var(--accent-red-soft);
+}
+</style>
+</head>
+<body>
+
+<div class="preview-header">
+  <div class="preview-badge">STORYTELLING // VISUAL PREVIEW</div>
+  <h1 class="preview-title">Entender o Cliente Primeiro, Não Só Vender</h1>
+  <p class="preview-subtitle">Carrossel Interativo para Instagram — Padrão VÉRTICE (Arraste para o lado ou use os botões)</p>
+  <div class="controls-hint">DICA: Arraste os slides com o mouse ou toque no mobile</div>
+</div>
+
+<div class="carousel-wrapper">
+  <div class="carousel-viewport" id="viewport">
+
+    <!-- SLIDE 1 (CAPA) -->
+    <div class="slide">
+      <img src="../../assets/images/carrossel_esquadrias_capa_v2.jpg" alt="Capa" class="slide-img-cover">
+      <div class="slide-header">
+        <span class="slide-tag">POSICIONAMENTO // HIGH TICKET</span>
+        <span class="slide-brand">VÉRTICE</span>
+      </div>
+      <div class="slide-body">
+        <h2 class="slide-title">Por que o orçamento mais caro vendeu e os mais baratos foram ignorados?</h2>
+        <p class="slide-subtitle">A diferença entre empresas que tentam vender a todo custo e aquelas que diagnosticam a real necessidade do cliente.</p>
+      </div>
+      <div class="slide-footer">
+        <span class="slide-handle">@leocauchiolli</span>
+        <span class="slide-num">01 / 07</span>
+      </div>
+      <div class="progress-bar" style="width: 14%;"></div>
+    </div>
+
+    <!-- SLIDE 2 -->
+    <div class="slide">
+      <img src="../../assets/images/carrossel_esquadrias_slide2_1785337634939.jpg" alt="Slide 2" class="slide-img-cover">
+      <div class="slide-header">
+        <span class="slide-tag">01. O CENÁRIO DE MERCADO</span>
+        <span class="slide-brand">VÉRTICE</span>
+      </div>
+      <div class="slide-body">
+        <h2 class="slide-title">A Prática Comum do Mercado</h2>
+        <div class="slide-box">
+          Um cliente precisava de esquadrias para uma obra de alto padrão.<br>
+          Solicitou <strong>5 orçamentos</strong>.<br><br>
+          4 fornecedores enviaram PDFs genéricos no WhatsApp.<br>
+          Nenhum perguntou a fase da obra ou o projeto.<br><br>
+          Trataram um contrato de alto valor como venda de balcão.
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span class="slide-handle">@leocauchiolli</span>
+        <span class="slide-num">02 / 07</span>
+      </div>
+      <div class="progress-bar" style="width: 28%;"></div>
+    </div>
+
+    <!-- SLIDE 3 -->
+    <div class="slide">
+      <img src="../../assets/images/carrossel_esquadrias_slide3_1785337652127.jpg" alt="Slide 3" class="slide-img-cover">
+      <div class="slide-header">
+        <span class="slide-tag">02. A VIRADA ESTRATÉGICA</span>
+        <span class="slide-brand">VÉRTICE</span>
+      </div>
+      <div class="slide-body">
+        <h2 class="slide-title">Escuta Ativa & Diagnóstico Presencial</h2>
+        <div class="slide-box">
+          O 5º fornecedor fez o oposto: <strong>foi até a obra</strong>.<br><br>
+          Em 15 minutos de escuta ativa, viu que vários itens do orçamento só iriam para a fase final do acabamento.<br><br>
+          Em vez de empurrar a venda completa, recomendou <span style="color:var(--accent-red)">tirar os itens não urgentes</span> para preservar o caixa do cliente.
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span class="slide-handle">@leocauchiolli</span>
+        <span class="slide-num">03 / 07</span>
+      </div>
+      <div class="progress-bar" style="width: 42%;"></div>
+    </div>
+
+    <!-- SLIDE 4 -->
+    <div class="slide">
+      <img src="../../assets/images/carrossel_esquadrias_slide4_1785337667586.jpg" alt="Slide 4" class="slide-img-cover">
+      <div class="slide-header">
+        <span class="slide-tag">03. O ATENDIMENTO BOUTIQUE</span>
+        <span class="slide-brand">VÉRTICE</span>
+      </div>
+      <div class="slide-body">
+        <h2 class="slide-title">Onde a Objeção de Preço Desaparece</h2>
+        <div class="slide-box">
+          Após o diagnóstico, o fornecedor convidou:<br>
+          <em>"Venha tomar um café conosco no showroom depois das 18h."</em><br><br>
+          Resultado: O cliente não discutiu preço. Sentiu segurança total.<br><br>
+          Quem ajuda o cliente a economizar onde não precisa gastar conquista a confiança para o contrato principal.
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span class="slide-handle">@leocauchiolli</span>
+        <span class="slide-num">04 / 07</span>
+      </div>
+      <div class="progress-bar" style="width: 57%;"></div>
+    </div>
+
+    <!-- SLIDE 5 -->
+    <div class="slide">
+      <img src="../../assets/images/carrossel_esquadrias_slide5_1785337683846.jpg" alt="Slide 5" class="slide-img-cover">
+      <div class="slide-header">
+        <span class="slide-tag">04. A TESE VÉRTICE</span>
+        <span class="slide-brand">VÉRTICE</span>
+      </div>
+      <div class="slide-body">
+        <h2 class="slide-title">Entender Primeiro, Vender Depois</h2>
+        <div class="slide-box">
+          Se você usa automações cegas, vídeos de gimbal sem cópia ou abordagens genéricas, é apenas mais um mandando PDF.<br><br>
+          Vender no alto ticket não é empurrar produtos.<br>
+          É <span style="color:var(--accent-red)">diagnosticar o caos, ouvir a operação e entregar clareza</span>.
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span class="slide-handle">@leocauchiolli</span>
+        <span class="slide-num">05 / 07</span>
+      </div>
+      <div class="progress-bar" style="width: 71%;"></div>
+    </div>
+
+    <!-- SLIDE 6 -->
+    <div class="slide">
+      <img src="../../assets/images/carrossel_esquadrias_capa_v2.jpg" alt="Slide 6" class="slide-img-cover">
+      <div class="slide-header">
+        <span class="slide-tag">05. ECOSSISTEMA VERTEX</span>
+        <span class="slide-brand">VÉRTICE</span>
+      </div>
+      <div class="slide-body">
+        <h2 class="slide-title">Como Aplicamos na Prática</h2>
+        <div class="slide-box">
+          • <strong>VERTEX OS:</strong> IA privada local que transcreve reuniões e gera atas/propostas em 45s.<br><br>
+          • <strong>BOUTIQUE AGENCY:</strong> Audiovisual executivo e páginas em HTML/Vite.<br><br>
+          • <strong>FRACTIONAL ADVISORY:</strong> Governança comercial no WhatsApp.
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span class="slide-handle">@leocauchiolli</span>
+        <span class="slide-num">06 / 07</span>
+      </div>
+      <div class="progress-bar" style="width: 85%;"></div>
+    </div>
+
+    <!-- SLIDE 7 (CTA) -->
+    <div class="slide" style="background: linear-gradient(135deg, rgba(225,29,72,0.15) 0%, #111113 100%); border-color: rgba(225,29,72,0.4);">
+      <div class="slide-header">
+        <span class="slide-tag">DIAGNÓSTICO OPERACIONAL</span>
+        <span class="slide-brand">VÉRTICE</span>
+      </div>
+      <div class="slide-body" style="text-align: center;">
+        <h2 class="slide-title" style="font-size:24px;">Sua empresa está apenas vendendo ou diagnosticando com autoridade?</h2>
+        <p class="slide-subtitle" style="margin-top:10px;">Transforme o atendimento e a presença do seu negócio do caos à clareza.</p>
+        <div style="margin-top:20px; background:var(--accent-red); color:#FFF; padding:12px 20px; border-radius:10px; font-weight:700; font-size:13px;">
+          Faça o Diagnóstico no Link da Bio
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span class="slide-handle">@leocauchiolli</span>
+        <span class="slide-num">07 / 07</span>
+      </div>
+      <div class="progress-bar" style="width: 100%;"></div>
+    </div>
+
+  </div>
+
+  <div class="nav-btn-container">
+    <button class="nav-btn" onclick="slideLeft()">← Anterior</button>
+    <button class="nav-btn" onclick="slideRight()">Próximo →</button>
+  </div>
+</div>
+
+<script>
+const viewport = document.getElementById('viewport');
+
+function slideLeft() {
+  viewport.scrollBy({ left: -464, behavior: 'smooth' });
+}
+
+function slideRight() {
+  viewport.scrollBy({ left: 464, behavior: 'smooth' });
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowLeft') slideLeft();
+  if (e.key === 'ArrowRight') slideRight();
+});
+</script>
+
+</body>
+</html>
