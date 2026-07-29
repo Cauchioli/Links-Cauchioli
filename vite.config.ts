@@ -23,7 +23,6 @@ export default defineConfig(({ mode }) => ({
       input: {
         main: path.resolve(__dirname, "index.html"),
         vertex: path.resolve(__dirname, "vertex.html"),
-        carrossel: path.resolve(__dirname, "carrossel.html"),
       },
     },
   },
