@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VERTEX — Ecossistema de Inteligência & Tração</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-black: #080808;
+  --bg-card: #111111;
+  --bg-card-hover: #161616;
+  --text-white: #F9F9FB;
+  --text-gray: #A1A1AA;
+  --text-muted: #52525B;
+  --accent-red: #E11D48;
+  --accent-red-soft: rgba(225, 29, 72, 0.12);
+  --border-dark: #222226;
+  --border-light: #333338;
+  --radius-card: 16px;
+  --radius-btn: 10px;
+  --radius-pill: 30px;
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'Geist Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+html {
+  background-color: var(--bg-black);
+  color: var(--text-white);
+  font-family: var(--font-body);
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: var(--accent-red);
+  color: #FFF;
+}
+
+body {
+  overflow-x: hidden;
+  background-color: var(--bg-black);
+  line-height: 1.65;
+}
+
+.bg-grid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+  background-image: 
+    radial-gradient(circle at 50% 15%, rgba(225, 29, 72, 0.06) 0%, transparent 60%),
+    linear-gradient(to right, rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+  background-size: 100% 100%, 50px 50px, 50px 50px;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  border-bottom: 1px solid var(--border-dark);
+  background: rgba(8, 8, 8, 0.88);
+  backdrop-filter: blur(20px);
+  padding: 16px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+}
+
+.brand-header-img {
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--text-gray);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: var(--text-white);
+}
+
+.btn-cta {
+  background: var(--accent-red);
+  color: #FFF;
+  border: none;
+  padding: 10px 22px;
+  border-radius: var(--radius-btn);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(225, 29, 72, 0.25);
+  text-decoration: none;
+}
+
+.btn-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(225, 29, 72, 0.4);
+}
+
+.journey-bar {
+  position: fixed;
+  right: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.journey-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  opacity: 0.35;
+  transition: opacity 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  user-select: none;
+}
+
+.journey-step:hover {
+  opacity: 0.75;
+}
+
+.journey-step span {
+  display: inline-block;
+  transform: scale(1);
+  transform-origin: left center;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.35s ease, font-weight 0.3s ease, letter-spacing 0.3s ease;
+}
+
+.journey-step.active {
+  opacity: 1;
+}
+
+.journey-step.active span {
+  transform: scale(1.22);
+  color: var(--text-white);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.journey-dot-container {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.journey-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--text-muted);
+  border-radius: 50%;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.journey-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid var(--accent-red);
+  border-radius: 50%;
+  transform: scale(0);
+  opacity: 0;
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.journey-step.active .journey-dot {
+  background: var(--accent-red);
+  transform: scale(1.6);
+  box-shadow: 0 0 10px rgba(225, 29, 72, 0.6);
+}
+
+.journey-step.active .journey-ring {
+  transform: scale(1.5);
+  opacity: 1;
+  animation: circlePulse 2.4s infinite ease-in-out;
+}
+
+@keyframes circlePulse {
+  0% { transform: scale(1.3); opacity: 0.9; }
+  50% { transform: scale(1.85); opacity: 0.4; }
+  100% { transform: scale(1.3); opacity: 0.9; }
+}
+
+section {
+  padding: 100px 8%;
+  border-bottom: 1px solid var(--border-dark);
+  position: relative;
+  z-index: 2;
+}
+
+.pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent-red-soft);
+  color: var(--accent-red);
+  border: 1px solid rgba(225, 29, 72, 0.25);
+  padding: 6px 16px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: -1px;
+  line-height: 1.15;
+  margin-bottom: 20px;
+  max-width: 860px;
+}
+
+.section-subtitle {
+  font-size: 1.15rem;
+  color: var(--text-gray);
+  line-height: 1.7;
+  max-width: 720px;
+  margin-bottom: 40px;
+}
+
+.hero {
+  min-height: 88vh;
+  padding: 140px 8% 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5.5vw, 4.8rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+  margin-bottom: 24px;
+  max-width: 950px;
+}
+
+.hero-desc {
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  color: var(--text-gray);
+  max-width: 720px;
+  line-height: 1.65;
+  margin-bottom: 36px;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.btn-hero-primary {
+  background: var(--text-white);
+  color: var(--bg-black);
+  padding: 14px 32px;
+  border-radius: var(--radius-btn);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.1);
+}
+
+.btn-hero-primary:hover {
+  background: var(--accent-red);
+  color: #FFF;
+}
+
+.btn-hero-secondary {
+  background: var(--bg-card);
+  color: var(--text-white);
+  border: 1px solid var(--border-light);
+  padding: 14px 32px;
+  border-radius: var(--radius-btn);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.btn-hero-secondary:hover {
+  border-color: var(--text-gray);
+}
+
+.wizard-tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  background: var(--bg-card);
+  color: var(--text-gray);
+  border: 1px solid var(--border-dark);
+  padding: 12px 24px;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tab-btn.active, .tab-btn:hover {
+  background: var(--bg-card-hover);
+  color: var(--text-white);
+  border-color: var(--accent-red);
+}
+
+.svg-icon {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.wizard-content {
+  border: 1px solid var(--border-dark);
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  padding: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.wizard-info h3 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.wizard-info p {
+  font-size: 14px;
+  color: var(--text-gray);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.wizard-solution-box {
+  background: #0D0D0F;
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  padding: 28px;
+}
+
+.wizard-solution-tag {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent-red);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.wizard-solution-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.wizard-solution-desc {
+  font-size: 13.5px;
+  color: var(--text-gray);
+  line-height: 1.6;
+}
+
+.eco-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.eco-pillar-card {
+  border: 1px solid var(--border-dark);
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  padding: 36px;
+  transition: all 0.25 ease;
+}
+
+.eco-pillar-card:hover {
+  border-color: var(--border-light);
+  transform: translateY(-2px);
+}
+
+.eco-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.eco-desc {
+  font-size: 14px;
+  color: var(--text-gray);
+  line-height: 1.65;
+  margin-bottom: 20px;
+}
+
+.deliv-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.deliv-card {
+  border: 1px solid var(--border-dark);
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  padding: 28px;
+}
+
+.manifesto-box {
+  padding: 40px 0;
+  max-width: 980px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.manifesto-unified-text {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -1.2px;
+  color: var(--text-white);
+}
+
+.manifesto-unified-text em {
+  color: var(--accent-red);
+  font-style: normal;
+}
+
+footer {
+  padding: 80px 8% 40px;
+  border-top: 1px solid var(--border-dark);
+  background: var(--bg-black);
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+@media (max-width: 900px) {
+  header { padding: 14px 20px; }
+  .nav-links, .journey-bar { display: none; }
+  section { padding: 70px 5%; }
+  .wizard-content, .eco-pillars-grid, .deliv-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+
+<header>
+  <a href="index.html" class="brand">
+    <img src="links/foto_perfil.jpg" alt="VERTEX Logo" class="brand-header-img">
+    <span style="font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:16px; color:#FFF;">VERTEX</span>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#diagnosis">Diagnóstico</a></li>
+    <li><a href="#solutions">Soluções</a></li>
+    <li><a href="#journey">Como Funciona</a></li>
+    <li><a href="#deliverables">Entregáveis</a></li>
+    <li><a href="#manifesto">Visão</a></li>
+  </ul>
+
+  <a href="#diagnosis" class="btn-cta">Fazer Diagnóstico</a>
+</header>
+
+<div class="journey-bar">
+  <div class="journey-step active" data-target="hero" onclick="scrollToSection('hero')">
+    <div class="journey-dot-container"><div class="journey-ring"></div><div class="journey-dot"></div></div>
+    <span>Início</span>
+  </div>
+  <div class="journey-step" data-target="diagnosis" onclick="scrollToSection('diagnosis')">
+    <div class="journey-dot-container"><div class="journey-ring"></div><div class="journey-dot"></div></div>
+    <span>Diagnóstico</span>
+  </div>
+  <div class="journey-step" data-target="solutions" onclick="scrollToSection('solutions')">
+    <div class="journey-dot-container"><div class="journey-ring"></div><div class="journey-dot"></div></div>
+    <span>Soluções</span>
+  </div>
+  <div class="journey-step" data-target="journey" onclick="scrollToSection('journey')">
+    <div class="journey-dot-container"><div class="journey-ring"></div><div class="journey-dot"></div></div>
+    <span>Jornada</span>
+  </div>
+  <div class="journey-step" data-target="deliverables" onclick="scrollToSection('deliverables')">
+    <div class="journey-dot-container"><div class="journey-ring"></div><div class="journey-dot"></div></div>
+    <span>Entregáveis</span>
+  </div>
+  <div class="journey-step" data-target="manifesto" onclick="scrollToSection('manifesto')">
+    <div class="journey-dot-container"><div class="journey-ring"></div><div class="journey-dot"></div></div>
+    <span>Visão</span>
+  </div>
+</div>
+
+<main>
+
+  <section class="hero" id="hero">
+    <div class="pill-badge">DO CAOS À CLAREZA ESTRATÉGICA</div>
+    <h1 class="hero-title">O Ecossistema Completo de Inteligência & Tração.</h1>
+    <p class="hero-desc">
+      Ajudamos fundadores, escritórios de advocacia e empresas B2B a transformarem a rotina operacional em clareza, autoridade de marca e escala de vendas.
+    </p>
+    <div class="hero-btns">
+      <a href="#diagnosis" class="btn-hero-primary">Descubra Sua Solução</a>
+      <a href="#solutions" class="btn-hero-secondary">Ver os 4 Pilares</a>
+    </div>
+  </section>
+
+  <section id="diagnosis">
+    <div class="pill-badge">01. DIAGNÓSTICO INTERATIVO</div>
+    <h2 class="section-title">Qual é o Maior Desafio do Seu Negócio Hoje?</h2>
+    <p class="section-subtitle">Selecione abaixo o seu gargalo atual para ver a solução exata recomendada pelo Ecossistema VERTEX.</p>
+
+    <div class="wizard-tabs">
+      <button class="tab-btn active" onclick="switchWizard(0)">
+        <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span>Faltam Horas na Sua Rotina?</span>
+      </button>
+
+      <button class="tab-btn" onclick="switchWizard(1)">
+        <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        <span>Sua Marca Parece Genérica?</span>
+      </button>
+
+      <button class="tab-btn" onclick="switchWizard(2)">
+        <svg class="svg-icon" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        <span>Atrai Curiosos no WhatsApp?</span>
+      </button>
+    </div>
+
+    <div class="wizard-content" id="wizardContent">
+      <div class="wizard-info">
+        <h3 id="wizTitle">Reuniões longas, áudios sem ata e digitação repetitiva?</h3>
+        <p id="wizDesc">
+          Quando o fundador e a equipe passam o dia refazendo propostas do zero e perdendo acordos de reuniões, o crescimento trava. Você precisa de inteligência privada que trabalhe por você.
+        </p>
+        <a href="#solutions" class="btn-hero-primary" style="display:inline-block; font-size:13px; padding:10px 20px;">Ativar Esta Solução</a>
+      </div>
+
+      <div class="wizard-solution-box">
+        <div class="wizard-solution-tag" id="wizSolTag">SOLUÇÃO RECOMENDADA</div>
+        <div class="wizard-solution-title" id="wizSolTitle">VERTEX OS (Sistema Operacional Privado)</div>
+        <div class="wizard-solution-desc" id="wizSolDesc">
+          Instalação de uma IA local na sua empresa que memoriza seu acervo de documentos, transcreve reuniões e gera atas e propostas comerciais A4 em 45 segundos. Devolve até 8 horas úteis por semana.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="solutions">
+    <div class="pill-badge">02. OS 4 PILARES DO ECOSSISTEMA</div>
+    <h2 class="section-title">Uma Infraestrutura Completa sob Medida.</h2>
+    <p class="section-subtitle">Quatro soluções especializadas projetadas para funcionar em harmonia perfeita dentro da sua organização.</p>
+
+    <div class="eco-pillars-grid">
+      <div class="eco-pillar-card">
+        <h3 class="eco-title">VERTEX OS</h3>
+        <p class="eco-desc">Sistema Operacional Privado instalado na sua máquina. Organiza seu conhecimento interno, gera atas de reunião e propostas A4 timbradas de forma automática.</p>
+      </div>
+
+      <div class="eco-pillar-card">
+        <h3 class="eco-title">VERTEX BOUTIQUE AGENCY</h3>
+        <p class="eco-desc">Produção audiovisual cinematográfica e engenharia web de alto status. Criamos sites boutique ultrarrápidos em HTML/Vite e gerenciamos anúncios de precisão no Google Ads.</p>
+      </div>
+
+      <div class="eco-pillar-card">
+        <div class="eco-title">VERTEX ADVISORY</div>
+        <p class="eco-desc">Fractional CMO e governança comercial. Padronizamos o atendimento da secretária/SDR no WhatsApp e orientamos a pivotagem para clientes de alta margem.</p>
+      </div>
+
+      <div class="eco-pillar-card">
+        <div class="eco-title">VERTEX ACADEMY</div>
+        <p class="eco-desc">O braço educacional para capacitação da sua equipe. Kits de IA no Escritório (produtos educacionais de entrada) e imersões de formação contínua.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="manifesto">
+    <div class="pill-badge">03. NOSSA VISÃO</div>
+    <div class="manifesto-box">
+      <h2 class="manifesto-unified-text">
+        "Conectamos o <span style="color:#AAA;">caos de informações</span>, presença e atendimento da sua empresa até que todo o ruído desapareça e a clareza se transforme em <em>autoridade, tempo e escala</em>."
+      </h2>
+      <div style="margin-top:36px; font-family:'Geist Mono', monospace; font-size:13px; font-weight:600; color:#E11D48; letter-spacing:3px;">
+        VERTEX // FROM CHAOS TO CLARITY
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  ECOSSISTEMA VERTEX © 2026. TODOS OS DIREITOS RESERVADOS.
+</footer>
+
+<script>
+const wizardData = [
+  {
+    title: "Reuniões longas, áudios sem ata e digitação repetitiva?",
+    desc: "Quando o fundador e a equipe passam o dia refazendo propostas do zero e perdendo acordos de reuniões, o crescimento trava. Você precisa de inteligência privada que trabalhe por você.",
+    solTag: "SOLUÇÃO 01 // PARA RECONQUISTAR TEMPO",
+    solTitle: "VERTEX OS (Sistema Operacional Privado)",
+    solDesc: "Instalação de uma IA local na sua empresa que memoriza seu acervo de documentos, transcreve reuniões e gera atas e propostas comerciais A4 em 45 segundos. Devolve até 8 horas úteis por semana."
+  },
+  {
+    title: "Sua marca parece genérica ou ultrapassada na internet?",
+    desc: "Se o seu site é lento ou seu conteúdo não reflete a excelência do seu trabalho, os clientes de alto ticket hesitam em fechar contratos. Você precisa de presença boutique e audiovisual executivo.",
+    solTag: "SOLUÇÃO 02 // PARA CONSOLIDAR AUTORIDADE",
+    solTitle: "VERTEX BOUTIQUE AGENCY",
+    solDesc: "Produção audiovisual cinematográfica de alto status, sites ultrarrápidos em HTML/Vite e gestão de Google Ads de precisão focada estritamente em clientes qualificados."
+  },
+  {
+    title: "Atrai muitos curiosos sem orçamento no WhatsApp?",
+    desc: "Queimar verba de anúncios no Google Ads com termos errados e perder tempo atendendo pessoas sem perfil destrói sua margem. Você precisa de um fluxo comercial alinhado.",
+    solTag: "SOLUÇÃO 03 // PARA ESCALAR VENDAS",
+    solTitle: "VERTEX ADVISORY",
+    solDesc: "Fractional CMO e governança comercial. Padronizamos o atendimento da sua secretária/SDR no WhatsApp, filtramos curiosos e desenhamos parcerias com mercados de alta margem."
+  }
+];
+
+function switchWizard(index) {
+  const btns = document.querySelectorAll('.tab-btn');
+  btns.forEach((btn, i) => {
+    if (i === index) btn.classList.add('active');
+    else btn.classList.remove('active');
+  });
+
+  const data = wizardData[index];
+  document.getElementById('wizTitle').innerText = data.title;
+  document.getElementById('wizDesc').innerText = data.desc;
+  document.getElementById('wizSolTag').innerText = data.solTag;
+  document.getElementById('wizSolTitle').innerText = data.solTitle;
+  document.getElementById('wizSolDesc').innerText = data.solDesc;
+}
+
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+}
+
+const observerOptions = {
+  root: null,
+  rootMargin: '-30% 0px -40% 0px',
+  threshold: 0.1
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const sectionId = entry.target.getAttribute('id');
+      document.querySelectorAll('.journey-step').forEach(step => {
+        if (step.getAttribute('data-target') === sectionId) {
+          step.classList.add('active');
+        } else {
+          step.classList.remove('active');
+        }
+      });
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('section').forEach(sec => {
+  observer.observe(sec);
+});
+</script>
+
+</body>
+</html>
