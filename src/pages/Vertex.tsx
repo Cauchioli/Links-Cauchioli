@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 export default function Vertex() {
   const [wizardIndex, setWizardIndex] = useState(0);
@@ -43,7 +43,7 @@ export default function Vertex() {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const sectionId = entry.target.getAttribute("id");
-          document.querySelectorAll(".journey-step").forEach((step) => {
+          document.querySelectorAll<HTMLElement>(".journey-step").forEach((step) => {
             if (step.getAttribute("data-target") === sectionId) {
               step.classList.add("active");
             } else {
@@ -54,7 +54,7 @@ export default function Vertex() {
       });
     }, observerOptions);
 
-    document.querySelectorAll("section").forEach((sec) => {
+    document.querySelectorAll<HTMLElement>("section").forEach((sec) => {
       observer.observe(sec);
     });
 
@@ -64,25 +64,6 @@ export default function Vertex() {
   return (
     <div style={{ backgroundColor: "#080808", color: "#F9F9FB", fontFamily: "'Inter', sans-serif", minHeight: "100vh", position: "relative" }}>
       <style>{`
-        :root {
-          --bg-black: #080808;
-          --bg-card: #111111;
-          --bg-card-hover: #161616;
-          --text-white: #F9F9FB;
-          --text-gray: #A1A1AA;
-          --text-muted: #52525B;
-          --accent-red: #E11D48;
-          --accent-red-soft: rgba(225, 29, 72, 0.12);
-          --border-dark: #222226;
-          --border-light: #333338;
-          --radius-card: 16px;
-          --radius-btn: 10px;
-          --radius-pill: 30px;
-          --font-display: 'Space Grotesk', sans-serif;
-          --font-body: 'Inter', sans-serif;
-          --font-mono: 'Geist Mono', monospace;
-        }
-
         .bg-grid {
           position: fixed;
           top: 0; left: 0; width: 100vw; height: 100vh;
@@ -275,7 +256,7 @@ export default function Vertex() {
               <p style={{ fontSize: "14px", color: "#A1A1AA", lineHeight: 1.65 }}>Sistema Operacional Privado instalado na sua máquina. Organiza seu conhecimento interno, gera atas de reunião e propostas A4 timbradas de forma automática.</p>
             </div>
             <div className="eco-pillar-card">
-              <h3 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "22px", fontWeight 700, marginBottom: "10px" }}>VERTEX BOUTIQUE AGENCY</h3>
+              <h3 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "22px", fontWeight: 700, marginBottom: "10px" }}>VERTEX BOUTIQUE AGENCY</h3>
               <p style={{ fontSize: "14px", color: "#A1A1AA", lineHeight: 1.65 }}>Produção audiovisual cinematográfica e engenharia web de alto status. Criamos sites boutique ultrarrápidos em HTML/Vite e gerenciamos anúncios de precisão no Google Ads.</p>
             </div>
             <div className="eco-pillar-card">
