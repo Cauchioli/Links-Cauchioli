@@ -6,448 +6,339 @@
 <title>VÉRTICE — Carrossel Interativo // Entender Antes de Vender</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg-dark: #080808;
-  --bg-card: #111113;
-  --text-white: #F9F9FB;
-  --text-gray: #A1A1AA;
-  --text-muted: #52525B;
-  --accent-red: #E11D48;
-  --accent-red-soft: rgba(225, 29, 72, 0.14);
-  --border-dark: #222226;
-  --border-light: #333338;
+  --color-bg: #050505;
+  --color-slide-bg: #0E0E11;
+  --color-primary: #E11D48;
+  --color-accent: #E11D48;
+  --color-text-main: #F9F9FB;
+  --color-text-muted: #A1A1AA;
+  --color-card-border: rgba(225, 29, 72, 0.25);
+  
+  --font-title: 'Cormorant Garamond', serif;
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
-  --font-mono: 'Geist Mono', monospace;
+  
+  --border-radius: 12px;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--color-bg);color:var(--color-text-main);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;min-height:100vh;font-family:var(--font-body)}
+body::before{content:'VÉRTICE SYSTEM · ARRASTE OU USE AS SETAS DO TECLADO';display:block;font-size:9px;letter-spacing:2.5px;color:rgba(255,255,255,.3);text-transform:uppercase;margin-bottom:24px;font-weight:700;}
 
-body {
-  background-color: var(--bg-dark);
-  color: var(--text-white);
-  font-family: var(--font-body);
+.carousel-container{position:relative;width:420px;display:flex;flex-direction:column;align-items:center}
+.carousel-viewport{width:420px;height:525px;overflow:hidden;position:relative;cursor:grab;user-select:none;background:var(--color-slide-bg);border-radius:12px;box-shadow:0 20px 50px rgba(0,0,0,.8), 0 0 0 1px rgba(255,255,255,.05)}
+.carousel-viewport:active{cursor:grabbing}
+.carousel-track{display:flex;height:100%;transition:transform .35s cubic-bezier(.4,0,.2,1);will-change:transform}
+.slide{width:420px;height:525px;flex-shrink:0;position:relative;overflow:hidden;background:var(--color-slide-bg);display:flex;flex-direction:column;padding:32px 30px 44px;}
+
+.tag{font-family:var(--font-body);font-size:8.5px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--color-accent);margin-bottom:10px;display:block}
+.h1{font-family:var(--font-title);font-size:24px;font-weight:700;line-height:1.2;letter-spacing:-0.5px;color:var(--color-text-main)}
+.h1 em{font-style:italic;color:var(--color-accent);font-weight:700}
+.body-text{font-family:var(--font-body);font-size:11.5px;font-weight:400;color:var(--color-text-muted);line-height:1.6;margin-top:8px}
+
+.prog-wrap{position:absolute;bottom:0;left:0;right:0;padding:12px 30px 22px;display:flex;align-items:center;gap:12px;z-index:10}
+.prog-track{flex:1;height:2px;background:rgba(255,255,255,.08);border-radius:1px}
+.prog-fill{height:100%;background:var(--color-primary)}
+.slide-num{position:absolute;right:30px;bottom:26px;font-family:var(--font-body);font-size:10px;font-weight:700;color:var(--color-accent);letter-spacing:0.5px}
+
+.dots-row{display:flex;justify-content:center;align-items:center;gap:6px;margin-top:20px}
+.dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.15);transition:all .3s ease;cursor:pointer}
+.dot.active{background:var(--color-primary);width:16px;border-radius:3px}
+
+.nav-btn{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:#111115;border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:var(--color-text-main);cursor:pointer;z-index:10;transition:all .2s ease;font-size:18px;font-family:var(--font-display)}
+.nav-btn:hover{background:var(--color-primary);border-color:var(--color-primary);color:#FFF}
+.nav-btn.prev{left:-56px}
+.nav-btn.next{right:-56px}
+
+.preview-panel{width:420px;margin-top:28px;border-top:1px solid rgba(255,255,255,.08);padding-top:18px}
+.preview-title{font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--color-accent);margin-bottom:6px;font-family:var(--font-body)}
+.preview-caption{font-size:11.5px;color:var(--color-text-muted);line-height:1.55;font-family:var(--font-body)}
+.preview-caption strong{color:var(--color-text-main);font-weight:600}
+
+.text-card{background:#141418;border:1px solid var(--color-card-border);border-radius:var(--border-radius);padding:16px 20px;box-shadow:0 8px 24px rgba(0,0,0,0.4);text-align:left;margin-top:16px}
+.text-card-text{font-family:var(--font-body);font-size:12px;font-weight:400;color:var(--color-text-main);line-height:1.65}
+.text-card-text strong{font-weight:600;color:var(--color-accent)}
+
+/* Layout Split Premium */
+.slide-split {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 40px 20px 80px;
-  min-height: 100vh;
-}
-
-.preview-header {
-  text-align: center;
-  max-width: 720px;
-  margin-bottom: 30px;
-}
-
-.preview-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--accent-red-soft);
-  color: var(--accent-red);
-  border: 1px solid rgba(225, 29, 72, 0.3);
-  padding: 6px 16px;
-  border-radius: 30px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 14px;
-  font-family: var(--font-mono);
-}
-
-.preview-title {
-  font-family: var(--font-display);
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-
-.preview-subtitle {
-  font-size: 14px;
-  color: var(--text-gray);
-}
-
-.controls-hint {
-  margin-top: 10px;
-  font-size: 12px;
-  color: var(--text-muted);
-  font-family: var(--font-mono);
-}
-
-/* CARROSSEL VIEWPORT */
-.carousel-wrapper {
+  flex-direction: row;
   position: relative;
-  width: 100%;
-  max-width: 1080px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding: 0 !important;
+  background: var(--color-slide-bg);
 }
-
-.carousel-viewport {
-  display: flex;
-  gap: 24px;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
-  padding: 20px 10px;
-  width: 100%;
-  scrollbar-width: thin;
-  scrollbar-color: var(--accent-red) var(--bg-dark);
-}
-
-.carousel-viewport::-webkit-scrollbar {
-  height: 6px;
-}
-.carousel-viewport::-webkit-scrollbar-track {
-  background: var(--bg-dark);
-}
-.carousel-viewport::-webkit-scrollbar-thumb {
-  background: var(--accent-red);
-  border-radius: 4px;
-}
-
-/* SLIDE 4:5 INSTAGRAM (440px x 550px scale) */
-.slide {
-  scroll-snap-align: center;
-  width: 440px;
-  height: 550px;
-  flex-shrink: 0;
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-dark);
-  border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-  padding: 32px 28px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  position: relative;
-  overflow: hidden;
-  user-select: none;
-}
-
-.slide-img-cover {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 50%;
-  object-fit: cover;
-  filter: brightness(0.75);
-  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%);
-  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%);
-}
-
-.slide-header {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.slide-tag {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 700;
-  color: var(--accent-red);
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-}
-
-.slide-brand {
-  font-family: var(--font-display);
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--text-white);
-  opacity: 0.8;
-}
-
-.slide-body {
-  position: relative;
-  z-index: 2;
-  flex: 1;
+.split-left {
+  width: 55%;
+  height: 100%;
+  padding: 38px 20px 44px 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 16px;
-  margin: 20px 0;
+  z-index: 3;
 }
-
-.slide-title {
-  font-family: var(--font-display);
-  font-size: 21px;
-  font-weight: 700;
-  line-height: 1.25;
-  color: var(--text-white);
-}
-
-.slide-subtitle {
-  font-size: 13px;
-  color: var(--text-gray);
-  line-height: 1.55;
-}
-
-.slide-box {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border-light);
-  border-radius: 12px;
-  padding: 16px;
-  font-size: 12.5px;
-  color: var(--text-gray);
-  line-height: 1.6;
-}
-
-.slide-box highlight {
-  color: var(--accent-red);
-  font-weight: 600;
-}
-
-.slide-footer {
+.split-right {
+  width: 45%;
+  height: 100%;
   position: relative;
-  z-index: 2;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-top: 1px solid var(--border-dark);
-  padding-top: 16px;
+  overflow: hidden;
+  z-index: 1;
 }
-
-.slide-handle {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--text-muted);
+.split-right img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
-
-.slide-num {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--accent-red);
-}
-
-.progress-bar {
+.split-overlay {
   position: absolute;
-  bottom: 0;
   left: 0;
-  height: 3px;
-  background: var(--accent-red);
-}
-
-/* NAV BUTTONS */
-.nav-btn-container {
-  display: flex;
-  gap: 16px;
-  margin-top: 24px;
-}
-
-.nav-btn {
-  background: var(--bg-card);
-  border: 1px solid var(--border-dark);
-  color: var(--text-white);
-  padding: 12px 24px;
-  border-radius: 30px;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.nav-btn:hover {
-  border-color: var(--accent-red);
-  background: var(--accent-red-soft);
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  background: linear-gradient(to right, var(--color-slide-bg) 0%, rgba(14, 14, 17, 0.9) 40%, rgba(14, 14, 17, 0) 100%);
+  z-index: 2;
+  pointer-events: none;
 }
 </style>
 </head>
 <body>
 
-<div class="preview-header">
-  <div class="preview-badge">STORYTELLING // VISUAL PREVIEW</div>
-  <h1 class="preview-title">Entender o Cliente Primeiro, Não Só Vender</h1>
-  <p class="preview-subtitle">Carrossel Interativo para Instagram — Padrão VÉRTICE (Arraste para o lado ou use os botões)</p>
-  <div class="controls-hint">DICA: Arraste os slides com o mouse ou toque no mobile</div>
-</div>
-
-<div class="carousel-wrapper">
-  <div class="carousel-viewport" id="viewport">
-
-    <!-- SLIDE 1 (CAPA) -->
-    <div class="slide">
-      <img src="../../assets/images/carrossel_esquadrias_capa_v2.jpg" alt="Capa" class="slide-img-cover">
-      <div class="slide-header">
-        <span class="slide-tag">POSICIONAMENTO // HIGH TICKET</span>
-        <span class="slide-brand">VÉRTICE</span>
-      </div>
-      <div class="slide-body">
-        <h2 class="slide-title">Por que o orçamento mais caro vendeu e os mais baratos foram ignorados?</h2>
-        <p class="slide-subtitle">A diferença entre empresas que tentam vender a todo custo e aquelas que diagnosticam a real necessidade do cliente.</p>
-      </div>
-      <div class="slide-footer">
-        <span class="slide-handle">@leocauchiolli</span>
-        <span class="slide-num">01 / 07</span>
-      </div>
-      <div class="progress-bar" style="width: 14%;"></div>
-    </div>
-
-    <!-- SLIDE 2 -->
-    <div class="slide">
-      <img src="../../assets/images/carrossel_esquadrias_slide2_1785337634939.jpg" alt="Slide 2" class="slide-img-cover">
-      <div class="slide-header">
-        <span class="slide-tag">01. O CENÁRIO DE MERCADO</span>
-        <span class="slide-brand">VÉRTICE</span>
-      </div>
-      <div class="slide-body">
-        <h2 class="slide-title">A Prática Comum do Mercado</h2>
-        <div class="slide-box">
-          Um cliente precisava de esquadrias para uma obra de alto padrão.<br>
-          Solicitou <strong>5 orçamentos</strong>.<br><br>
-          4 fornecedores enviaram PDFs genéricos no WhatsApp.<br>
-          Nenhum perguntou a fase da obra ou o projeto.<br><br>
-          Trataram um contrato de alto valor como venda de balcão.
+<div class="carousel-container">
+  <div class="nav-btn prev" onclick="goTo(cur - 1)">&#8592;</div>
+  <div class="nav-btn next" onclick="goTo(cur + 1)">&#8594;</div>
+  
+  <div class="carousel-viewport" id="vp">
+    <div class="carousel-track" id="track">
+      
+      <!-- Slide 1: Capa (Split Layout) -->
+      <div class="slide slide-split">
+        <div class="split-left">
+          <span class="tag">POSICIONAMENTO ESTRATÉGICO</span>
+          <h1 class="h1" style="font-size: 23px; font-weight: 700; line-height: 1.25;">Por que o orçamento mais caro vendeu <br><em style="font-family: var(--font-title);">e os mais baratos rodaram?</em></h1>
+          <p class="body-text" style="font-size: 11px; margin-top: 14px;">A diferença real entre empresas que tentam empurrar vendas e aquelas que diagnosticam primeiro.</p>
+        </div>
+        <div class="split-right">
+          <div class="split-overlay"></div>
+          <img src="../../assets/images/carrossel_esquadrias_capa_v2.jpg" style="object-position: center center;">
+        </div>
+        <div class="slide-num">1 / 7</div>
+        <div class="prog-wrap" style="padding: 12px 30px 22px">
+          <div class="prog-track"><div class="prog-fill" id="fill1" style="width: 14.3%"></div></div>
         </div>
       </div>
-      <div class="slide-footer">
-        <span class="slide-handle">@leocauchiolli</span>
-        <span class="slide-num">02 / 07</span>
-      </div>
-      <div class="progress-bar" style="width: 28%;"></div>
-    </div>
 
-    <!-- SLIDE 3 -->
-    <div class="slide">
-      <img src="../../assets/images/carrossel_esquadrias_slide3_1785337652127.jpg" alt="Slide 3" class="slide-img-cover">
-      <div class="slide-header">
-        <span class="slide-tag">02. A VIRADA ESTRATÉGICA</span>
-        <span class="slide-brand">VÉRTICE</span>
-      </div>
-      <div class="slide-body">
-        <h2 class="slide-title">Escuta Ativa & Diagnóstico Presencial</h2>
-        <div class="slide-box">
-          O 5º fornecedor fez o oposto: <strong>foi até a obra</strong>.<br><br>
-          Em 15 minutos de escuta ativa, viu que vários itens do orçamento só iriam para a fase final do acabamento.<br><br>
-          Em vez de empurrar a venda completa, recomendou <span style="color:var(--accent-red)">tirar os itens não urgentes</span> para preservar o caixa do cliente.
+      <!-- Slide 2: O Cenário -->
+      <div class="slide">
+        <div class="slide-header" style="display:flex;align-items:center;gap:10px;margin-bottom:12px;width:100%;height:30px">
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--color-primary);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:10px;">V</div>
+          <div style="display:flex;flex-direction:column">
+            <span style="font-family:var(--font-body);font-size:9.5px;font-weight:700;color:var(--color-text-main)">@leocauchiolli</span>
+            <span style="font-family:var(--font-body);font-size:7.5px;color:var(--color-text-muted)">VERTEX // 01. O CENÁRIO DE MERCADO</span>
+          </div>
+        </div>
+        <div class="slide-image-wrapper" style="width:100%;height:180px;border-radius:8px;overflow:hidden;margin-bottom:12px;border:1px solid rgba(255,255,255,0.05)">
+          <img src="../../assets/images/carrossel_esquadrias_slide2_1785337634939.jpg" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+        <div class="slide-content-wrapper" style="flex:1;display:flex;flex-direction:column;justify-content:flex-start">
+          <span class="tag">A Prática Comum</span>
+          <h2 class="h1" style="font-size:19px;">4 Orçamentos Frios no WhatsApp</h2>
+          <p class="body-text">Um cliente pediu 5 orçamentos de esquadrias para uma obra de alto padrão.<br><br>4 fornecedores enviaram PDFs padronizados. Nenhum perguntou sobre a fase da obra ou as reais prioridades do projeto. Trataram alta margem como venda de balcão.</p>
+        </div>
+        <div class="slide-num">2 / 7</div>
+        <div class="prog-wrap" style="padding:12px 30px 22px">
+          <div class="prog-track"><div class="prog-fill" style="width: 28.6%"></div></div>
         </div>
       </div>
-      <div class="slide-footer">
-        <span class="slide-handle">@leocauchiolli</span>
-        <span class="slide-num">03 / 07</span>
-      </div>
-      <div class="progress-bar" style="width: 42%;"></div>
-    </div>
 
-    <!-- SLIDE 4 -->
-    <div class="slide">
-      <img src="../../assets/images/carrossel_esquadrias_slide4_1785337667586.jpg" alt="Slide 4" class="slide-img-cover">
-      <div class="slide-header">
-        <span class="slide-tag">03. O ATENDIMENTO BOUTIQUE</span>
-        <span class="slide-brand">VÉRTICE</span>
-      </div>
-      <div class="slide-body">
-        <h2 class="slide-title">Onde a Objeção de Preço Desaparece</h2>
-        <div class="slide-box">
-          Após o diagnóstico, o fornecedor convidou:<br>
-          <em>"Venha tomar um café conosco no showroom depois das 18h."</em><br><br>
-          Resultado: O cliente não discutiu preço. Sentiu segurança total.<br><br>
-          Quem ajuda o cliente a economizar onde não precisa gastar conquista a confiança para o contrato principal.
+      <!-- Slide 3: Escuta Ativa -->
+      <div class="slide">
+        <div class="slide-header" style="display:flex;align-items:center;gap:10px;margin-bottom:12px;width:100%;height:30px">
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--color-primary);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:10px;">V</div>
+          <div style="display:flex;flex-direction:column">
+            <span style="font-family:var(--font-body);font-size:9.5px;font-weight:700;color:var(--color-text-main)">@leocauchiolli</span>
+            <span style="font-family:var(--font-body);font-size:7.5px;color:var(--color-text-muted)">VERTEX // 02. A VIRADA ESTRATÉGICA</span>
+          </div>
+        </div>
+        <div class="slide-image-wrapper" style="width:100%;height:180px;border-radius:8px;overflow:hidden;margin-bottom:12px;border:1px solid rgba(255,255,255,0.05)">
+          <img src="../../assets/images/carrossel_esquadrias_slide3_1785337652127.jpg" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+        <div class="slide-content-wrapper" style="flex:1;display:flex;flex-direction:column;justify-content:flex-start">
+          <span class="tag">Diagnóstico Presencial</span>
+          <h2 class="h1" style="font-size:19px;">O 5º Fornecedor Foi à Obra</h2>
+          <p class="body-text">Em 15 minutos de escuta ativa, ele percebeu que vários itens só seriam instalados no acabamento final.<br><br>Em vez de empurrar a venda completa, orientou <strong style="color:var(--color-primary)">remover esses itens do pedido inicial</strong> para preservar o fluxo de caixa do cliente.</p>
+        </div>
+        <div class="slide-num">3 / 7</div>
+        <div class="prog-wrap" style="padding:12px 30px 22px">
+          <div class="prog-track"><div class="prog-fill" style="width: 42.8%"></div></div>
         </div>
       </div>
-      <div class="slide-footer">
-        <span class="slide-handle">@leocauchiolli</span>
-        <span class="slide-num">04 / 07</span>
-      </div>
-      <div class="progress-bar" style="width: 57%;"></div>
-    </div>
 
-    <!-- SLIDE 5 -->
-    <div class="slide">
-      <img src="../../assets/images/carrossel_esquadrias_slide5_1785337683846.jpg" alt="Slide 5" class="slide-img-cover">
-      <div class="slide-header">
-        <span class="slide-tag">04. A TESE VÉRTICE</span>
-        <span class="slide-brand">VÉRTICE</span>
-      </div>
-      <div class="slide-body">
-        <h2 class="slide-title">Entender Primeiro, Vender Depois</h2>
-        <div class="slide-box">
-          Se você usa automações cegas, vídeos de gimbal sem cópia ou abordagens genéricas, é apenas mais um mandando PDF.<br><br>
-          Vender no alto ticket não é empurrar produtos.<br>
-          É <span style="color:var(--accent-red)">diagnosticar o caos, ouvir a operação e entregar clareza</span>.
+      <!-- Slide 4: Atendimento Boutique (Sem foto, card amplo) -->
+      <div class="slide" style="justify-content: center; padding: 44px 44px 64px;">
+        <div class="slide-header" style="display:flex;align-items:center;gap:10px;margin-bottom:20px;width:100%;height:30px">
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--color-primary);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:10px;">V</div>
+          <div style="display:flex;flex-direction:column">
+            <span style="font-family:var(--font-body);font-size:9.5px;font-weight:700;color:var(--color-text-main)">@leocauchiolli</span>
+            <span style="font-family:var(--font-body);font-size:7.5px;color:var(--color-text-muted)">VERTEX // 03. ATENDIMENTO BOUTIQUE</span>
+          </div>
+        </div>
+        
+        <span class="tag">Conexão & Status</span>
+        <h2 class="h1" style="font-size:22px;margin-bottom:12px;">Onde a Objeção de Preço Desaparece</h2>
+        <p class="body-text" style="font-size:12px;margin-bottom:18px;">Após o diagnóstico, o fornecedor convidou:<br><em>"Venha tomar um café conosco no showroom depois das 18h."</em></p>
+        
+        <div class="text-card">
+          <p class="text-card-text">
+            O cliente não pediu desconto.<br>
+            Sentiu segurança e encontrou um parceiro consultivo.<br><br>
+            <strong>Quem ajuda o cliente a economizar onde não precisa gastar conquista a confiança para os contratos de maior margem.</strong>
+          </p>
+        </div>
+        
+        <div class="slide-num">4 / 7</div>
+        <div class="prog-wrap" style="padding:12px 44px 22px">
+          <div class="prog-track"><div class="prog-fill" style="width: 57.1%"></div></div>
         </div>
       </div>
-      <div class="slide-footer">
-        <span class="slide-handle">@leocauchiolli</span>
-        <span class="slide-num">05 / 07</span>
-      </div>
-      <div class="progress-bar" style="width: 71%;"></div>
-    </div>
 
-    <!-- SLIDE 6 -->
-    <div class="slide">
-      <img src="../../assets/images/carrossel_esquadrias_capa_v2.jpg" alt="Slide 6" class="slide-img-cover">
-      <div class="slide-header">
-        <span class="slide-tag">05. ECOSSISTEMA VERTEX</span>
-        <span class="slide-brand">VÉRTICE</span>
-      </div>
-      <div class="slide-body">
-        <h2 class="slide-title">Como Aplicamos na Prática</h2>
-        <div class="slide-box">
-          • <strong>VERTEX OS:</strong> IA privada local que transcreve reuniões e gera atas/propostas em 45s.<br><br>
-          • <strong>BOUTIQUE AGENCY:</strong> Audiovisual executivo e páginas em HTML/Vite.<br><br>
-          • <strong>FRACTIONAL ADVISORY:</strong> Governança comercial no WhatsApp.
+      <!-- Slide 5: Tese VÉRTICE -->
+      <div class="slide">
+        <div class="slide-header" style="display:flex;align-items:center;gap:10px;margin-bottom:12px;width:100%;height:30px">
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--color-primary);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:10px;">V</div>
+          <div style="display:flex;flex-direction:column">
+            <span style="font-family:var(--font-body);font-size:9.5px;font-weight:700;color:var(--color-text-main)">@leocauchiolli</span>
+            <span style="font-family:var(--font-body);font-size:7.5px;color:var(--color-text-muted)">VERTEX // 04. A TESE VÉRTICE</span>
+          </div>
+        </div>
+        <div class="slide-image-wrapper" style="width:100%;height:180px;border-radius:8px;overflow:hidden;margin-bottom:12px;border:1px solid rgba(255,255,255,0.05)">
+          <img src="../../assets/images/carrossel_esquadrias_slide5_1785337683846.jpg" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+        <div class="slide-content-wrapper" style="flex:1;display:flex;flex-direction:column;justify-content:flex-start">
+          <span class="tag">Doutrina Executiva</span>
+          <h2 class="h1" style="font-size:19px;">Entender Primeiro, Vender Depois</h2>
+          <p class="body-text">Se você usa automações cegas ou abordagens genéricas, você é apenas mais um mandando PDF no WhatsApp.<br><br>Vender no alto ticket não é empurrar ofertas. É <strong style="color:var(--color-primary)">diagnosticar a dor, ouvir a operação e entregar clareza</strong>.</p>
+        </div>
+        <div class="slide-num">5 / 7</div>
+        <div class="prog-wrap" style="padding:12px 30px 22px">
+          <div class="prog-track"><div class="prog-fill" style="width: 71.4%"></div></div>
         </div>
       </div>
-      <div class="slide-footer">
-        <span class="slide-handle">@leocauchiolli</span>
-        <span class="slide-num">06 / 07</span>
-      </div>
-      <div class="progress-bar" style="width: 85%;"></div>
-    </div>
 
-    <!-- SLIDE 7 (CTA) -->
-    <div class="slide" style="background: linear-gradient(135deg, rgba(225,29,72,0.15) 0%, #111113 100%); border-color: rgba(225,29,72,0.4);">
-      <div class="slide-header">
-        <span class="slide-tag">DIAGNÓSTICO OPERACIONAL</span>
-        <span class="slide-brand">VÉRTICE</span>
-      </div>
-      <div class="slide-body" style="text-align: center;">
-        <h2 class="slide-title" style="font-size:24px;">Sua empresa está apenas vendendo ou diagnosticando com autoridade?</h2>
-        <p class="slide-subtitle" style="margin-top:10px;">Transforme o atendimento e a presença do seu negócio do caos à clareza.</p>
-        <div style="margin-top:20px; background:var(--accent-red); color:#FFF; padding:12px 20px; border-radius:10px; font-weight:700; font-size:13px;">
-          Faça o Diagnóstico no Link da Bio
+      <!-- Slide 6: O Ecossistema -->
+      <div class="slide">
+        <div class="slide-header" style="display:flex;align-items:center;gap:10px;margin-bottom:18px;width:100%;height:30px">
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--color-primary);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:10px;">V</div>
+          <div style="display:flex;flex-direction:column">
+            <span style="font-family:var(--font-body);font-size:9.5px;font-weight:700;color:var(--color-text-main)">@leocauchiolli</span>
+            <span style="font-family:var(--font-body);font-size:7.5px;color:var(--color-text-muted)">VERTEX // 05. APLICAÇÃO NA PRÁTICA</span>
+          </div>
+        </div>
+        
+        <span class="tag">Ecossistema VERTEX</span>
+        <h2 class="h1" style="font-size:21px;margin-bottom:12px;">Como Traduzimos Isso Para Sua Empresa</h2>
+        
+        <div class="text-card" style="margin-top:8px;">
+          <p class="text-card-text">
+            • <strong>VERTEX OS:</strong> IA privada local que transcreve reuniões e gera atas e propostas em 45s.<br><br>
+            • <strong>BOUTIQUE AGENCY:</strong> Audiovisual cinematográfico autoral e sites em HTML/Vite.<br><br>
+            • <strong>FRACTIONAL ADVISORY:</strong> Governança comercial e triagem no WhatsApp.
+          </p>
+        </div>
+        
+        <div class="slide-num">6 / 7</div>
+        <div class="prog-wrap" style="padding:12px 30px 22px">
+          <div class="prog-track"><div class="prog-fill" style="width: 85.7%"></div></div>
         </div>
       </div>
-      <div class="slide-footer">
-        <span class="slide-handle">@leocauchiolli</span>
-        <span class="slide-num">07 / 07</span>
-      </div>
-      <div class="progress-bar" style="width: 100%;"></div>
-    </div>
 
+      <!-- Slide 7: CTA Final -->
+      <div class="slide" style="background: linear-gradient(135deg, rgba(225,29,72,0.2) 0%, #0E0E11 100%); justify-content: center; align-items: center; text-align: center; padding: 40px 30px;">
+        <div style="width:60px;height:60px;border-radius:50%;background:var(--color-primary);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:22px;margin-bottom:20px;">V</div>
+        
+        <span class="tag" style="margin-bottom:12px;">DIAGNÓSTICO OPERACIONAL</span>
+        <h2 class="h1" style="font-size:22px;margin-bottom:14px;">Sua empresa está apenas vendendo ou diagnosticando com autoridade?</h2>
+        <p class="body-text" style="font-size:12px;max-width:320px;margin-bottom:24px;">Transforme o atendimento e a presença da sua marca do caos à clareza.</p>
+        
+        <div style="background:var(--color-primary);color:#FFF;padding:12px 28px;border-radius:30px;font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;">
+          FAÇA O DIAGNÓSTICO NO LINK DA BIO
+        </div>
+        
+        <div class="slide-num">7 / 7</div>
+        <div class="prog-wrap" style="padding:12px 30px 22px">
+          <div class="prog-track"><div class="prog-fill" style="width: 100%"></div></div>
+        </div>
+      </div>
+
+    </div>
   </div>
 
-  <div class="nav-btn-container">
-    <button class="nav-btn" onclick="slideLeft()">← Anterior</button>
-    <button class="nav-btn" onclick="slideRight()">Próximo →</button>
+  <div class="dots-row" id="dots">
+    <div class="dot active" onclick="goTo(0)"></div>
+    <div class="dot" onclick="goTo(1)"></div>
+    <div class="dot" onclick="goTo(2)"></div>
+    <div class="dot" onclick="goTo(3)"></div>
+    <div class="dot" onclick="goTo(4)"></div>
+    <div class="dot" onclick="goTo(5)"></div>
+    <div class="dot" onclick="goTo(6)"></div>
+  </div>
+</div>
+
+<div class="preview-panel">
+  <div class="preview-title">Legenda Pronta para Publicação</div>
+  <div class="preview-caption">
+    <strong>Por que o orçamento mais caro vendeu e os mais baratos foram ignorados?</strong><br><br>
+    No mercado de alta margem, a maioria das empresas atua como atendente de balcão: manda um PDF frio no WhatsApp e reza para fechar.<br><br>
+    Quem vai até o cliente, ouve o problema real e ajuda a economizar onde não é necessário gastar agora, ganha a confiança total para fechar os maiores contratos.<br><br>
+    Essa é a mesma doutrina do Ecossistema VERTEX: entender primeiro, diagnosticar o caos e entregar clareza.<br><br>
+    #VERTEX #PosicionamentoEstrategico #B2B #HighTicket #VendasConsultivas #LeoCauchiolli
   </div>
 </div>
 
 <script>
-const viewport = document.getElementById('viewport');
+let cur = 0;
+const total = 7;
+const track = document.getElementById('track');
+const dots = document.querySelectorAll('.dot');
 
-function slideLeft() {
-  viewport.scrollBy({ left: -464, behavior: 'smooth' });
+function goTo(n) {
+  if (n < 0) n = 0;
+  if (n >= total) n = total - 1;
+  cur = n;
+  track.style.transform = `translateX(-${cur * 420}px)`;
+  dots.forEach((d, i) => d.classList.toggle('active', i === cur));
 }
 
-function slideRight() {
-  viewport.scrollBy({ left: 464, behavior: 'smooth' });
+// Suporte para Drag / Touch
+let isDragging = false, startX = 0, currentTranslate = 0, prevTranslate = 0;
+const vp = document.getElementById('vp');
+
+vp.addEventListener('mousedown', dragStart);
+vp.addEventListener('touchstart', dragStart);
+vp.addEventListener('mouseup', dragEnd);
+vp.addEventListener('touchend', dragEnd);
+vp.addEventListener('mouseleave', dragEnd);
+vp.addEventListener('mousemove', drag);
+vp.addEventListener('touchmove', drag);
+
+function dragStart(e) {
+  isDragging = true;
+  startX = getPositionX(e);
 }
+function drag(e) {
+  if (!isDragging) return;
+  const currentX = getPositionX(e);
+  const diff = currentX - startX;
+  if (diff > 50) { goTo(cur - 1); isDragging = false; }
+  if (diff < -50) { goTo(cur + 1); isDragging = false; }
+}
+function dragEnd() { isDragging = false; }
+function getPositionX(e) { return e.type.includes('mouse') ? e.pageX : e.touches[0].clientX; }
 
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowLeft') slideLeft();
-  if (e.key === 'ArrowRight') slideRight();
+  if (e.key === 'ArrowLeft') goTo(cur - 1);
+  if (e.key === 'ArrowRight') goTo(cur + 1);
 });
 </script>
 
